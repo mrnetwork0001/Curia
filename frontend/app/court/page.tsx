@@ -1,0 +1,103 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Navbar from "@/components/Navbar";
+import AgentCard from "@/components/AgentCard";
+import MessageFeed from "@/components/MessageFeed";
+import PhaseIndicator from "@/components/PhaseIndicator";
+import VerdictDisplay from "@/components/VerdictDisplay";
+import { useWebSocket } from "@/lib/websocket";
+import { getAgents, getTrialStatus } from "@/lib/api";
+import type { AgentInfo, CuriaMessage } from "@/lib/types";
+import styles from "./page.module.css";
+
+export default function CourtPage() {
+  const { connected, messages, currentPhase, trialActive } = useWebSocket();
+  const [agents, setAgents] = useState<AgentInfo[]>([]);
+  const [verdict, setVerdict] = useState<string | null>(null);
+  const [juryVotes, setJuryVotes] = useState<Record<string, string>>({});
+
+  // Fetch agents on mount
+  useEffect(() => {
+    const fetchAgents = async () => {
+      try {
+        const data = await getAgents();
+        setAgents(data.agents as unknown as AgentInfo[]);
+      } catch (err) {
+        // Fallback agent data for when backend isn't running
+        setAgents([
+          { role: "judge", label: "Chief Justice", color: "#D4A84B", icon: "⚖️", peer_id: "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2", axl_port: 9002, message_count: 0, status: "idle" },
+          { role: "prosecutor", label: "Lead Prosecutor", color: "#E74C3C", icon: "🔴", peer_id: "b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3", axl_port: 9012, message_count: 0, status: "idle" },
+          { role: "defender", label: "Defense Counsel", color: "#4A90D9", icon: "🛡️", peer_id: "c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4", axl_port: 9022, message_count: 0, status: "idle" },
+          { role: "juror1", label: "Juror #1", color: "#2ECC71", icon: "👤", peer_id: "d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5", axl_port: 9032, message_count: 0, status: "idle" },
+          { role: "juror2", label: "Juror #2", color: "#27AE60", icon: "👤", peer_id: "e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6", axl_port: 9042, message_count: 0, status: "idle" },
+        ]);
+      }
+    };
+    fetchAgents();
+    const interval = setInterval(fetchAgents, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Watch for verdict
+  useEffect(() => {
+    const verdictMsg = messages.find(
+      (m: CuriaMessage) => m.message_type === "final_verdict"
+    );
+    if (verdictMsg) {
+      setVerdict(verdictMsg.content);
+      setJuryVotes((verdictMsg.metadata?.jury_votes as Record<string, string>) || {});
+    }
+  }, [messages]);
+
+  return (
+    <>
+      <Navbar />
+      <main className={styles.main}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>⚖️ Live Courtroom</h1>
+          <div className={styles.status}>
+            <span className={`${styles.statusDot} ${connected ? styles.connected : ""}`} />
+            <span>{connected ? "Connected" : "Connecting..."}</span>
+            {trialActive && <span className={styles.liveTag}>● LIVE</span>}
+          </div>
+        </div>
+
+        <div className={styles.courtLayout}>
+          {/* Left Panel: Agents */}
+          <aside className={styles.agentPanel}>
+            <h2 className={styles.panelTitle}>Court Agents</h2>
+            <div className={styles.agentList}>
+              {agents.map((agent) => (
+                <AgentCard
+                  key={agent.role}
+                  agent={agent}
+                  isActive={trialActive && agent.status === "listening"}
+                />
+              ))}
+            </div>
+          </aside>
+
+          {/* Center: Message Feed */}
+          <section className={styles.messagePanel}>
+            <div className={styles.messagePanelHeader}>
+              <h2 className={styles.panelTitle}>P2P Message Stream</h2>
+              <span className={styles.messageCount}>
+                {messages.length} messages
+              </span>
+            </div>
+            <MessageFeed messages={messages} />
+            {verdict && (
+              <VerdictDisplay verdict={verdict} juryVotes={juryVotes} />
+            )}
+          </section>
+
+          {/* Right Panel: Phases */}
+          <aside className={styles.phasePanel}>
+            <PhaseIndicator currentPhase={currentPhase} />
+          </aside>
+        </div>
+      </main>
+    </>
+  );
+}

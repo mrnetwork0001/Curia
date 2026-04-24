@@ -1,0 +1,15 @@
+{
+  "id": "case-2026-002",
+  "title": "Fork Attribution Dispute",
+  "category": "code_ownership",
+  "description": "Developer A claims Developer B forked their open-source library, removed attribution, rebranded it as proprietary software, and is now selling commercial licenses. Developer B argues the MIT license allows this and their version has substantial original work that differentiates it from the original.",
+  "evidence": [
+    "Original repo with MIT license, 2,400 stars, created 18 months ago",
+    "Forked repo: 89% code similarity per git diff analysis",
+    "Developer B's commercial license terms charging $500/year",
+    "Git commit history showing Developer B's first commit matches Developer A's codebase",
+    "Developer B claims 11% original code constitutes 'substantial transformation'"
+  ],
+  "plaintiff": "Developer A (Original Author)",
+  "defendant": "Developer B (Fork Maintainer)"
+}

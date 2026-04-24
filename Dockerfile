@@ -1,0 +1,17 @@
+# Curia API Server + Agents
+FROM python:3.11-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY agents/ ./agents/
+COPY orchestrator/ ./orchestrator/
+COPY server/ ./server/
+COPY sample_cases/ ./sample_cases/
+COPY configs/ ./configs/
+
+EXPOSE 8000
+
+CMD ["python", "-m", "uvicorn", "server.main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,0 +1,141 @@
+.main {
+  padding: 88px 24px 24px;
+  max-width: 1500px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  transition: all 0.3s ease;
+}
+
+.connected {
+  background: #2ECC71;
+  box-shadow: 0 0 8px #2ECC71;
+}
+
+.liveTag {
+  color: #E74C3C;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.courtLayout {
+  display: grid;
+  grid-template-columns: 280px 1fr 220px;
+  gap: 16px;
+  min-height: calc(100vh - 180px);
+}
+
+.agentPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.agentList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.messagePanel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.messagePanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.panelTitle {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.messageCount {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 2px 10px;
+  border-radius: 10px;
+}
+
+.phasePanel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@media (max-width: 1024px) {
+  .courtLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .agentPanel {
+    order: 2;
+  }
+
+  .agentList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+
+  .messagePanel {
+    order: 1;
+    min-height: 400px;
+  }
+
+  .phasePanel {
+    order: 3;
+  }
+}

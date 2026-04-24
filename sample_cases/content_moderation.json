@@ -1,0 +1,15 @@
+{
+  "id": "case-2026-003",
+  "title": "Community Post Removal Appeal",
+  "category": "content_moderation",
+  "description": "A community moderator removed a post criticizing the project's tokenomics, citing 'FUD and misinformation.' The author appeals, claiming the post contained factual analysis with cited sources and the removal constitutes censorship that violates the community's own governance guidelines.",
+  "evidence": [
+    "Original post text with 12 cited sources from reputable crypto analytics platforms",
+    "Moderation log showing removal reason: 'Spreading FUD'",
+    "Community guidelines section 4.2: 'Constructive criticism with sources is welcome'",
+    "Three previous posts by other users with similar criticism that were not removed",
+    "Moderator's conflict of interest: holds 50,000 tokens of the criticized project"
+  ],
+  "plaintiff": "Post Author (Community Member)",
+  "defendant": "Community Moderation Team"
+}

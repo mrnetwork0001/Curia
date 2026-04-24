@@ -1,0 +1,128 @@
+.wrapper {
+  padding: 16px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.stepper {
+  display: flex;
+  flex-direction: column;
+}
+
+.step {
+  display: flex;
+  gap: 12px;
+  position: relative;
+}
+
+.stepLine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.stepDot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-medium);
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.complete .stepDot {
+  background: rgba(212, 168, 75, 0.2);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.current .stepDot {
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 15px rgba(212, 168, 75, 0.4);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.future .stepDot {
+  opacity: 0.4;
+}
+
+.check {
+  width: 12px;
+  height: 12px;
+}
+
+.stepIcon {
+  font-size: 0.75rem;
+}
+
+.current .stepIcon {
+  filter: grayscale(1) brightness(0.2);
+}
+
+.connector {
+  width: 2px;
+  height: 24px;
+  background: var(--border-medium);
+  transition: background 0.3s ease;
+}
+
+.complete .connector {
+  background: var(--gold);
+}
+
+.stepContent {
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 4px;
+}
+
+.stepLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  transition: color 0.3s ease;
+}
+
+.complete .stepLabel {
+  color: var(--text-secondary);
+}
+
+.current .stepLabel {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.stepDesc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(212, 168, 75, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(212, 168, 75, 0.6);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
