@@ -42,30 +42,37 @@ export default function Navbar() {
           <span className={styles.tagline}>Protocol</span>
         </Link>
 
-        <div className={`${styles.links} ${menuOpen ? styles.open : ""}`}>
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`${styles.link} ${pathname === link.href ? styles.active : ""}`}
-              onClick={() => setMenuOpen(false)}
-              {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-            >
-              {link.label}
-              {link.external && <span style={{ fontSize: '0.7em', marginLeft: '4px', opacity: 0.7 }}>↗</span>}
-            </Link>
-          ))}
-        </div>
+        <div className={styles.rightSection}>
+          <div className={`${styles.links} ${menuOpen ? styles.open : ""}`}>
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`${styles.link} ${pathname === link.href ? styles.active : ""}`}
+                onClick={() => setMenuOpen(false)}
+                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
+                {link.label}
+                {link.external && <span style={{ fontSize: '0.7em', marginLeft: '4px', opacity: 0.7 }}>↗</span>}
+              </Link>
+            ))}
+          </div>
 
-        <button
-          className={styles.hamburger}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          <span className={`${styles.bar} ${menuOpen ? styles.barOpen : ""}`} />
-          <span className={`${styles.bar} ${menuOpen ? styles.barOpen : ""}`} />
-          <span className={`${styles.bar} ${menuOpen ? styles.barOpen : ""}`} />
-        </button>
+          <div className={styles.meshStatus} title="5/5 Nodes Active">
+            <div className={styles.pulseDot}></div>
+            <span className={styles.statusText}>AXL Mesh Active</span>
+          </div>
+
+          <button
+            className={styles.hamburger}
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            <span className={`${styles.bar} ${menuOpen ? styles.barOpen : ""}`} />
+            <span className={`${styles.bar} ${menuOpen ? styles.barOpen : ""}`} />
+            <span className={`${styles.bar} ${menuOpen ? styles.barOpen : ""}`} />
+          </button>
+        </div>
       </div>
     </nav>
   );
