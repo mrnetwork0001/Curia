@@ -1,5 +1,6 @@
 {
-  "PrivateKeyPath": "keys/juror1.pem",
+  "PrivateKeyPath": "/opt/curia/keys/juror1.pem",
+  "Listen": ["tls://0.0.0.0:9031"],
   "Peers": ["tls://127.0.0.1:9001"],
   "api_port": 9032,
   "bridge_addr": "127.0.0.1",

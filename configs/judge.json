@@ -1,6 +1,6 @@
 {
-  "PrivateKeyPath": "keys/judge.pem",
-  "Listen": ["tls://127.0.0.1:9001"],
+  "PrivateKeyPath": "/opt/curia/keys/judge.pem",
+  "Listen": ["tls://0.0.0.0:9001"],
   "Peers": [],
   "api_port": 9002,
   "bridge_addr": "127.0.0.1",
