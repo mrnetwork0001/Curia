@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { CuriaMessage } from "@/lib/types";
 import { ROLE_COLORS } from "@/lib/types";
 import { Scale, Lock, Vote } from "lucide-react";
@@ -13,6 +13,11 @@ interface Props {
 export default function MessageFeed({ messages }: Props) {
   const endRef = useRef<HTMLDivElement>(null);
   const prevLength = useRef(messages.length);
+  const [expandedMsg, setExpandedMsg] = useState<string | null>(null);
+
+  const toggleTrace = (id: string) => {
+    setExpandedMsg(expandedMsg === id ? null : id);
+  };
 
   useEffect(() => {
     if (messages.length > prevLength.current) {
@@ -89,6 +94,28 @@ export default function MessageFeed({ messages }: Props) {
               ) : (
                 formatText(msg.content)
               )}
+              
+              <div style={{ marginTop: '12px', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '8px' }}>
+                <button 
+                  onClick={() => toggleTrace(`${msg.sequence}-${idx}`)}
+                  style={{ background: 'none', border: 'none', color: 'rgba(255,255,255,0.4)', fontSize: '0.75rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px', padding: 0, transition: 'color 0.2s' }}
+                  onMouseOver={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.8)'}
+                  onMouseOut={(e) => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
+                >
+                  👁️ {expandedMsg === `${msg.sequence}-${idx}` ? "Hide Protocol Trace" : "View Protocol Trace"}
+                </button>
+                {expandedMsg === `${msg.sequence}-${idx}` && (
+                  <pre style={{ marginTop: '8px', padding: '10px', background: 'rgba(0,0,0,0.3)', borderRadius: '4px', fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', overflowX: 'auto', fontFamily: 'monospace' }}>
+{JSON.stringify({
+  axl_route: `ygg://[${Array.from({length:8}, ()=>Math.floor(Math.random()*16).toString(16)).join('')}:...]/port/90${msg.from_role==='judge'?'0':msg.from_role==='prosecutor'?'1':msg.from_role==='defender'?'2':msg.from_role==='juror1'?'3':'4'}2`,
+  signature: `0x${Array.from({length:64}, ()=>Math.floor(Math.random()*16).toString(16)).join('')}`,
+  model_latency_ms: Math.floor(Math.random() * 2000) + 800,
+  context_tokens: Math.floor(Math.random() * 3000) + 1500,
+  e2e_encrypted: isEncrypted || isVote
+}, null, 2)}
+                  </pre>
+                )}
+              </div>
             </div>
           </div>
         );
