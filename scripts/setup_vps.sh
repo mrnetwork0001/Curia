@@ -167,11 +167,24 @@ EOF
 log "AXL configs written"
 
 # ---------------------------------------------------------------
-# 7. Write .env (EDIT YOUR API KEY BELOW BEFORE RUNNING)
+# 7. Write .env (prompt for API key — never hardcode secrets)
 # ---------------------------------------------------------------
+echo ""
+echo -n "🔑 Paste your OpenAI API key (input hidden): "
+read -rs OPENAI_KEY
+echo ""
+
+if [ -z "$OPENAI_KEY" ]; then
+    warn "No API key entered — defaulting to mock mode (no real LLM)"
+    OPENAI_KEY="sk-xxx"
+    LLM_PROVIDER="mock"
+else
+    LLM_PROVIDER="openai"
+fi
+
 cat > "$CURIA_DIR/.env" << EOF
-LLM_PROVIDER=openai
-OPENAI_API_KEY=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
+LLM_PROVIDER=${LLM_PROVIDER}
+OPENAI_API_KEY=${OPENAI_KEY}
 LLM_MODEL=gpt-4o-mini
 SIMULATION_MODE=false
 API_HOST=0.0.0.0
