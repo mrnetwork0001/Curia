@@ -14,7 +14,7 @@ export default function Navbar() {
     { href: "/court", label: "Courtroom" },
     { href: "/cases", label: "Cases" },
     { href: "/network", label: "Network" },
-    { href: "https://github.com/mrnetwork0001/Curia#readme", label: "Docs", external: true },
+    { href: "/docs", label: "Docs" },
   ];
 
   return (
