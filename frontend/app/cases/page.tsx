@@ -21,8 +21,21 @@ export default function CasesPage() {
   const fetchCases = async () => {
     try {
       const data = await getCases();
+      const raw = data.active_cases as unknown as CaseRecord[];
+      // Deduplicate by ID: keep active > timeout > completed, then most recent
+      const seen = new Map<string, CaseRecord>();
+      const statusRank: Record<string, number> = { active: 0, completed: 1, timeout: 2 };
+      for (const c of raw) {
+        const existing = seen.get(c.id);
+        if (!existing || (statusRank[c.status] ?? 9) < (statusRank[existing.status] ?? 9)) {
+          seen.set(c.id, c);
+        }
+      }
+      const deduped = Array.from(seen.values()).sort(
+        (a, b) => (statusRank[a.status] ?? 9) - (statusRank[b.status] ?? 9)
+      );
       setSampleCases(data.sample_cases as unknown as SampleCase[]);
-      setActiveCases(data.active_cases as unknown as CaseRecord[]);
+      setActiveCases(deduped);
     } catch (err) {
       // Fallback sample cases
       setSampleCases([
@@ -120,8 +133,8 @@ export default function CasesPage() {
               <>
                 <h2 className={styles.sectionTitle} style={{ marginTop: "40px" }}>Active & Completed</h2>
                 <div className={styles.caseGrid}>
-                  {activeCases.map((c) => (
-                    <div key={c.id} className={styles.caseCard}>
+                  {activeCases.map((c, i) => (
+                    <div key={`${c.id}-${i}`} className={styles.caseCard}>
                       <div className={styles.caseHeader}>
                         <span className={`badge ${c.status === "active" ? "badge-active" : c.status === "completed" ? "badge-completed" : "badge-gold"}`}>
                           {c.status}
