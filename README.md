@@ -79,7 +79,7 @@ No AXL binary needed — agents communicate via in-memory transport:
 
 ```bash
 # Clone
-git clone https://github.com/your-repo/curia.git
+git clone https://github.com/mrnetwork0001/Curia.git
 cd curia
 
 # Backend setup

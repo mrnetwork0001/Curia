@@ -127,7 +127,7 @@ class BaseAgent(ABC):
         self.peer_registry[role] = peer_id
         logger.info(f"[{self.role}] Registered peer: {role} -> {peer_id[:16]}...")
 
-    def send_to_peer(self, peer_id: str, message: dict):
+    def send_to_peer(self, peer_id: str, message: dict, _fire_callback: bool = True):
         """Send a message to a specific peer via AXL."""
         # Stamp outgoing metadata
         message["from_role"] = self.role
@@ -150,19 +150,57 @@ class BaseAgent(ABC):
 
         self.message_log.append(message)
 
-        # Fire callback for real-time updates
-        if self.on_message_callback:
+        # Callback is fired by the caller (broadcast fires it once; direct sends fire it here)
+        if _fire_callback and self.on_message_callback:
             try:
                 self.on_message_callback(message)
             except Exception as e:
                 logger.error(f"[{self.role}] Callback error: {e}")
 
     def broadcast(self, message: dict, exclude_roles: list = None):
-        """Send a message to all registered peers, optionally excluding certain roles."""
+        """Send a message to all registered peers, firing the event callback exactly once."""
         exclude = exclude_roles or []
+        recipients = [
+            peer_id for role, peer_id in self.peer_registry.items()
+            if role not in exclude
+        ]
+        if not recipients:
+            return
+
+        # Send to the first recipient with a stamped sequence (sets from_role / timestamp)
+        # then re-use the same stamped copy for remaining peers (no callback per send)
+        first = True
+        stamped_msg = message
         for role, peer_id in self.peer_registry.items():
-            if role not in exclude:
-                self.send_to_peer(peer_id, message.copy())
+            if role in exclude:
+                continue
+            if first:
+                # First send stamps the message and adds to log; we fire callback after loop
+                self.send_to_peer(peer_id, stamped_msg, _fire_callback=False)
+                # send_to_peer mutates message in-place (adds from_role/timestamp/sequence)
+                stamped_msg = self.message_log[-1]  # get the stamped copy back
+                first = False
+            else:
+                # Direct transport send for remaining recipients — same message, no restamping
+                if self.simulation_mode:
+                    self._transport.send(self.peer_id, peer_id, stamped_msg)
+                else:
+                    try:
+                        requests.post(
+                            f"{self.axl_base}/send",
+                            headers={"X-Destination-Peer-Id": peer_id},
+                            data=json.dumps(stamped_msg).encode(),
+                            timeout=10,
+                        )
+                    except Exception as e:
+                        logger.error(f"[{self.role}] Broadcast send to {peer_id[:16]} failed: {e}")
+
+        # Fire event callback exactly once for the whole broadcast
+        if self.on_message_callback:
+            try:
+                self.on_message_callback(stamped_msg)
+            except Exception as e:
+                logger.error(f"[{self.role}] Broadcast callback error: {e}")
 
     def poll_messages(self) -> Optional[tuple]:
         """Poll for one inbound message. Returns (sender_peer_id, message_dict) or None."""
@@ -190,12 +228,9 @@ class BaseAgent(ABC):
                     if result:
                         sender, message = result
                         self.message_log.append(message)
-                        # Fire callback
-                        if self.on_message_callback:
-                            try:
-                                self.on_message_callback(message)
-                            except Exception:
-                                pass
+                        # NOTE: Do NOT fire on_message_callback here.
+                        # The sender already fired it exactly once via send_to_peer / broadcast.
+                        # Firing it again on receive would cause duplicates in the transcript.
                         self.handle_message(sender, message)
                 except Exception as e:
                     logger.error(f"[{self.role}] Listener error: {e}")

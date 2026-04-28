@@ -7,7 +7,7 @@ import MessageFeed from "@/components/MessageFeed";
 import PhaseIndicator from "@/components/PhaseIndicator";
 import VerdictDisplay from "@/components/VerdictDisplay";
 import { useWebSocket } from "@/lib/websocket";
-import { getAgents, getTrialStatus } from "@/lib/api";
+import { getAgents, getTrialStatus, getTopology } from "@/lib/api";
 import type { AgentInfo, CuriaMessage } from "@/lib/types";
 import styles from "./page.module.css";
 
@@ -16,6 +16,7 @@ export default function CourtPage() {
   const [agents, setAgents] = useState<AgentInfo[]>([]);
   const [verdict, setVerdict] = useState<string | null>(null);
   const [juryVotes, setJuryVotes] = useState<Record<string, string>>({});
+  const [simulationMode, setSimulationMode] = useState<boolean | null>(null);
 
   // Fetch agents on mount
   useEffect(() => {
@@ -36,6 +37,12 @@ export default function CourtPage() {
     };
     fetchAgents();
     const interval = setInterval(fetchAgents, 5000);
+
+    // Fetch topology to determine AXL vs Simulation mode
+    getTopology()
+      .then((topo) => setSimulationMode(topo.simulation_mode))
+      .catch(() => setSimulationMode(true));
+
     return () => clearInterval(interval);
   }, []);
 
@@ -56,10 +63,30 @@ export default function CourtPage() {
       <main className={styles.main}>
         <div className={styles.header}>
           <h1 className={styles.title}>⚖️ Live Courtroom</h1>
-          <div className={styles.status}>
-            <span className={`${styles.statusDot} ${connected ? styles.connected : ""}`} />
-            <span>{connected ? "Connected" : "Connecting..."}</span>
-            {trialActive && <span className={styles.liveTag}>● LIVE</span>}
+          <div className={styles.headerRight}>
+            {simulationMode !== null && (
+              <div
+                className={styles.axlModeBadge}
+                style={{
+                  background: simulationMode
+                    ? "rgba(212,168,75,0.12)"
+                    : "rgba(46,204,113,0.12)",
+                  borderColor: simulationMode ? "rgba(212,168,75,0.3)" : "rgba(46,204,113,0.4)",
+                  color: simulationMode ? "#D4A84B" : "#2ECC71",
+                }}
+                title={simulationMode
+                  ? "Running in simulation mode — no real AXL nodes. Set SIMULATION_MODE=false and start AXL nodes to use real P2P network."
+                  : "Real AXL nodes active — all agent communication is encrypted P2P over the Yggdrasil mesh network."
+                }
+              >
+                {simulationMode ? "⚡ SIMULATION MODE" : "🌐 REAL AXL NETWORK"}
+              </div>
+            )}
+            <div className={styles.status}>
+              <span className={`${styles.statusDot} ${connected ? styles.connected : ""}`} />
+              <span>{connected ? "Connected" : "Connecting..."}</span>
+              {trialActive && <span className={styles.liveTag}>● LIVE</span>}
+            </div>
           </div>
         </div>
 
