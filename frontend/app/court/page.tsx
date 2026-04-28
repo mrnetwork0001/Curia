@@ -7,16 +7,27 @@ import MessageFeed from "@/components/MessageFeed";
 import PhaseIndicator from "@/components/PhaseIndicator";
 import VerdictDisplay from "@/components/VerdictDisplay";
 import { useWebSocket } from "@/lib/websocket";
-import { getAgents, getTrialStatus, getTopology } from "@/lib/api";
+import { getAgents, getTrialStatus, getTopology, getTranscript } from "@/lib/api";
 import type { AgentInfo, CuriaMessage } from "@/lib/types";
 import styles from "./page.module.css";
 
 export default function CourtPage() {
-  const { connected, messages, currentPhase, trialActive } = useWebSocket();
+  const { connected, messages: wsMessages, currentPhase: wsPhase, trialActive: wsTrialActive } = useWebSocket();
   const [agents, setAgents] = useState<AgentInfo[]>([]);
   const [verdict, setVerdict] = useState<string | null>(null);
   const [juryVotes, setJuryVotes] = useState<Record<string, string>>({});
   const [simulationMode, setSimulationMode] = useState<boolean | null>(null);
+  const [catchupMessages, setCatchupMessages] = useState<CuriaMessage[]>([]);
+  const [currentPhase, setCurrentPhase] = useState<string>("filing");
+  const [trialActive, setTrialActive] = useState(false);
+
+  // Merge WS messages with any REST catch-up messages (deduplicate by sequence)
+  const messages = [
+    ...catchupMessages,
+    ...wsMessages.filter(
+      (m) => !catchupMessages.some((c) => c.sequence === m.sequence && c.from_role === m.from_role)
+    ),
+  ];
 
   // Fetch agents on mount
   useEffect(() => {
@@ -36,14 +47,39 @@ export default function CourtPage() {
       }
     };
     fetchAgents();
-    const interval = setInterval(fetchAgents, 5000);
+    const agentInterval = setInterval(fetchAgents, 5000);
 
     // Fetch topology to determine AXL vs Simulation mode
     getTopology()
       .then((topo) => setSimulationMode(topo.simulation_mode))
       .catch(() => setSimulationMode(true));
 
-    return () => clearInterval(interval);
+    // Poll trial status + fetch transcript catch-up every 3s
+    // This ensures we don't miss messages fired before the WS connected
+    const syncTrialState = async () => {
+      try {
+        const status = await getTrialStatus();
+        setTrialActive(status.active);
+        if (status.phase) setCurrentPhase(status.phase);
+        if (status.verdict) setVerdict(status.verdict);
+
+        if (status.active && status.case_id) {
+          const t = await getTranscript(status.case_id);
+          if (t.transcript && t.transcript.length > 0) {
+            setCatchupMessages(t.transcript as unknown as CuriaMessage[]);
+          }
+          if (t.verdict) setVerdict(t.verdict);
+        }
+      } catch { /* backend may not have active trial */ }
+    };
+
+    syncTrialState();
+    const syncInterval = setInterval(syncTrialState, 3000);
+
+    return () => {
+      clearInterval(agentInterval);
+      clearInterval(syncInterval);
+    };
   }, []);
 
   // Watch for verdict
