@@ -25,7 +25,7 @@ export default function DocsPage() {
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}><Network size={24} /> Gensyn AXL Integration</h2>
         <p className={styles.text}>
-          The core innovation of Curia lies in our heavy integration with the <span className={styles.highlight}>Gensyn AXL network</span>. We utilize AXL not just as a message queue, but as the foundational routing layer for our autonomous agent mesh.
+          The core innovation of Curia lies in our heavy integration with the <a href="https://x.com/gensynai/status/2044467361550348406" target="_blank" rel="noopener noreferrer" className={styles.highlight} style={{ textDecoration: "underline", textUnderlineOffset: "4px" }}>Gensyn AXL network</a>. We utilize AXL not just as a message queue, but as the foundational routing layer for our autonomous agent mesh.
         </p>
         <ul className={styles.list}>
           <li><strong>Yggdrasil Overlay Mesh:</strong> Five entirely separate Python processes bind to 5 distinct AXL Go nodes, communicating strictly via P2P event-cascades.</li>
