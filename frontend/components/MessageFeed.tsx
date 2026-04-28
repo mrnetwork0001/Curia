@@ -26,6 +26,20 @@ export default function MessageFeed({ messages }: Props) {
     );
   }
 
+  const formatText = (text: string) => {
+    return text.split('\n').map((line, i) => (
+      <span key={i}>
+        {line.split(/(\*\*.*?\*\*)/g).map((part, j) => {
+          if (part.startsWith('**') && part.endsWith('**')) {
+            return <strong key={j}>{part.slice(2, -2)}</strong>;
+          }
+          return part;
+        })}
+        <br />
+      </span>
+    ));
+  };
+
   return (
     <div className={styles.feed} id="message-feed">
       {messages.map((msg, idx) => {
@@ -64,7 +78,7 @@ export default function MessageFeed({ messages }: Props) {
                   🗳️ {msg.content}
                 </span>
               ) : (
-                msg.content
+                formatText(msg.content)
               )}
             </div>
           </div>

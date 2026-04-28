@@ -10,12 +10,26 @@ interface Props {
 export default function VerdictDisplay({ verdict, juryVotes }: Props) {
   if (!verdict) return null;
 
+  const formatText = (text: string) => {
+    return text.split('\n').map((line, i) => (
+      <span key={i}>
+        {line.split(/(\*\*.*?\*\*)/g).map((part, j) => {
+          if (part.startsWith('**') && part.endsWith('**')) {
+            return <strong key={j}>{part.slice(2, -2)}</strong>;
+          }
+          return part;
+        })}
+        <br />
+      </span>
+    ));
+  };
+
   return (
     <div className={styles.wrapper} id="verdict-display">
       <div className={styles.gavel}>⚖️</div>
       <h2 className={styles.title}>Final Verdict</h2>
       <div className={styles.content}>
-        {verdict}
+        {formatText(verdict)}
       </div>
       {juryVotes && Object.keys(juryVotes).length > 0 && (
         <div className={styles.votes}>
