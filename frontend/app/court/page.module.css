@@ -91,14 +91,14 @@
 }
 
 .messagePanel {
-  background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: 0px;
   padding: 16px;
   display: flex;
   flex-direction: column;
   min-height: 0;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
 }
 
 .messagePanelHeader {
@@ -126,10 +126,10 @@
 }
 
 .phasePanel {
-  background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-medium);
+  border-radius: 0px;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes pulse {

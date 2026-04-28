@@ -67,22 +67,24 @@ export default function VerdictDisplay({ verdict, juryVotes }: Props) {
             rel="noopener noreferrer"
             className="pdf-hide"
             style={{ 
-              background: '#000000', 
-              border: '1px solid #333333', 
-              color: 'white', 
+              background: 'var(--text-primary)', 
+              border: '2px solid var(--text-primary)', 
+              color: 'var(--bg-primary)', 
               padding: '8px 16px', 
-              borderRadius: '6px', 
+              borderRadius: '0px', 
               cursor: 'pointer', 
               fontSize: '0.85rem',
-              fontWeight: 600,
+              fontWeight: 700,
               textDecoration: 'none',
+              textTransform: 'uppercase',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              transition: 'opacity 0.2s'
+              transition: 'all 0.2s',
+              boxShadow: '4px 4px 0px var(--border-medium)'
             }}
-            onMouseOver={(e) => e.currentTarget.style.opacity = '0.8'}
-            onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
+            onMouseOver={(e) => { e.currentTarget.style.transform = 'translate(-2px, -2px)'; e.currentTarget.style.boxShadow = '6px 6px 0px var(--border-medium)'; }}
+            onMouseOut={(e) => { e.currentTarget.style.transform = 'translate(0px, 0px)'; e.currentTarget.style.boxShadow = '4px 4px 0px var(--border-medium)'; }}
           >
             <svg viewBox="0 0 24 24" aria-hidden="true" style={{ width: '14px', height: '14px', fill: 'currentColor' }}><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.007 4.25H5.078z"></path></svg>
             Share on X
@@ -93,48 +95,54 @@ export default function VerdictDisplay({ verdict, juryVotes }: Props) {
             disabled={archiving || ipfsHash !== null}
             title="Archive Immutable Verdict to IPFS"
             style={{ 
-              background: ipfsHash ? '#2ECC71' : 'var(--gold-dim)', 
-              border: `1px solid ${ipfsHash ? '#2ECC71' : 'var(--gold)'}`, 
+              background: ipfsHash ? '#2ECC71' : 'var(--bg-primary)', 
+              border: `2px solid ${ipfsHash ? '#2ECC71' : 'var(--gold)'}`, 
               color: ipfsHash ? '#fff' : 'var(--gold)', 
               padding: '8px 16px', 
-              borderRadius: '6px', 
+              borderRadius: '0px', 
               cursor: ipfsHash ? 'default' : 'pointer', 
               fontSize: '0.85rem',
-              fontWeight: 600,
-              transition: 'background 0.2s',
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              transition: 'all 0.2s',
               display: 'flex',
               alignItems: 'center',
-              gap: '6px'
+              gap: '6px',
+              boxShadow: ipfsHash ? 'none' : '4px 4px 0px var(--gold)'
             }}
+            onMouseOver={(e) => { if(!ipfsHash && !archiving) { e.currentTarget.style.transform = 'translate(-2px, -2px)'; e.currentTarget.style.boxShadow = '6px 6px 0px var(--gold)'; e.currentTarget.style.background = 'var(--gold)'; e.currentTarget.style.color = 'var(--bg-primary)'; } }}
+            onMouseOut={(e) => { if(!ipfsHash && !archiving) { e.currentTarget.style.transform = 'translate(0px, 0px)'; e.currentTarget.style.boxShadow = '4px 4px 0px var(--gold)'; e.currentTarget.style.background = 'var(--bg-primary)'; e.currentTarget.style.color = 'var(--gold)'; } }}
           >
-            {archiving ? "⏳ Archiving..." : ipfsHash ? "✅ IPFS Saved" : "📦 Archive to IPFS"}
+            {archiving ? "[ Archiving... ]" : ipfsHash ? "[ IPFS Saved ]" : "[ Archive to IPFS ]"}
           </button>
           <button 
             className="pdf-hide"
             onClick={() => window.print()}
             title="Save as PDF"
             style={{ 
-              background: 'var(--gold-dim)', 
-              border: '1px solid var(--gold)', 
-              color: 'var(--gold)', 
+              background: 'var(--bg-primary)', 
+              border: '2px solid var(--text-secondary)', 
+              color: 'var(--text-secondary)', 
               padding: '8px 16px', 
-              borderRadius: '6px', 
+              borderRadius: '0px', 
               cursor: 'pointer', 
               fontSize: '0.85rem',
-              fontWeight: 600,
-              transition: 'background 0.2s'
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              transition: 'all 0.2s',
+              boxShadow: '4px 4px 0px var(--text-secondary)'
             }}
-            onMouseOver={(e) => e.currentTarget.style.background = 'rgba(212, 168, 75, 0.3)'}
-            onMouseOut={(e) => e.currentTarget.style.background = 'var(--gold-dim)'}
+            onMouseOver={(e) => { e.currentTarget.style.transform = 'translate(-2px, -2px)'; e.currentTarget.style.boxShadow = '6px 6px 0px var(--text-secondary)'; e.currentTarget.style.background = 'var(--text-secondary)'; e.currentTarget.style.color = 'var(--bg-primary)'; }}
+            onMouseOut={(e) => { e.currentTarget.style.transform = 'translate(0px, 0px)'; e.currentTarget.style.boxShadow = '4px 4px 0px var(--text-secondary)'; e.currentTarget.style.background = 'var(--bg-primary)'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
           >
-            📄 Download PDF
+            [ Download PDF ]
           </button>
         </div>
       </div>
       {ipfsHash && (
-        <div style={{ padding: '12px', background: 'rgba(46,204,113,0.1)', border: '1px solid rgba(46,204,113,0.3)', borderRadius: '6px', marginBottom: '20px', fontSize: '0.85rem', color: '#2ECC71', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-          <span style={{ fontWeight: 600 }}>IPFS CID:</span> 
-          <code style={{ background: 'rgba(0,0,0,0.3)', padding: '2px 6px', borderRadius: '4px', wordBreak: 'break-all' }}>ipfs://{ipfsHash}</code>
+        <div style={{ padding: '12px', background: 'var(--bg-tertiary)', border: '2px solid #2ECC71', borderRadius: '0px', marginBottom: '20px', fontSize: '0.85rem', color: '#2ECC71', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', boxShadow: '4px 4px 0px #2ECC71' }}>
+          <span style={{ fontWeight: 700, textTransform: 'uppercase' }}>[ IPFS CID ]</span> 
+          <code style={{ background: 'var(--bg-primary)', padding: '4px 8px', borderRadius: '0px', wordBreak: 'break-all', border: '1px solid #2ECC71' }}>ipfs://{ipfsHash}</code>
           <span style={{ marginLeft: 'auto', fontSize: '0.8rem', opacity: 0.8 }}>Immutable record generated</span>
         </div>
       )}

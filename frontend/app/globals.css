@@ -3,43 +3,43 @@
    Dark courtroom aesthetic with gold accents & glassmorphism
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=VT323&display=swap');
 
 /* ----- CSS Custom Properties ----- */
 :root {
   /* Backgrounds */
-  --bg-primary: #0A0D14;
-  --bg-secondary: #0F1219;
-  --bg-tertiary: #141822;
-  --bg-elevated: #1A1F2E;
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-tertiary: #1a1a1a;
+  --bg-elevated: #222222;
 
-  /* Glassmorphism */
-  --glass-bg: rgba(15, 18, 25, 0.85);
-  --glass-border: rgba(212, 168, 75, 0.12);
-  --glass-blur: 16px;
+  /* Glassmorphism Removed -> Solid Brutalist */
+  --glass-bg: #0a0a0a;
+  --glass-border: rgba(250, 215, 209, 0.4);
+  --glass-blur: 0px;
 
-  /* Accent Colors */
-  --gold: #D4A84B;
-  --gold-dim: rgba(212, 168, 75, 0.15);
-  --gold-glow: rgba(212, 168, 75, 0.3);
-  --blue: #4A90D9;
-  --blue-dim: rgba(74, 144, 217, 0.15);
+  /* Accent Colors (Gensyn Peach/Pink) */
+  --gold: #fad7d1;
+  --gold-dim: rgba(250, 215, 209, 0.15);
+  --gold-glow: rgba(250, 215, 209, 0.3);
+  --blue: #88c0d0;
+  --blue-dim: rgba(136, 192, 208, 0.15);
 
   /* Role Colors */
-  --role-judge: #D4A84B;
-  --role-prosecutor: #E74C3C;
-  --role-defender: #4A90D9;
-  --role-juror: #2ECC71;
-  --role-juror2: #27AE60;
+  --role-judge: #fad7d1;
+  --role-prosecutor: #bf616a;
+  --role-defender: #88c0d0;
+  --role-juror: #a3be8c;
+  --role-juror2: #8fbcbb;
 
   /* Text */
-  --text-primary: #F0EDE6;
-  --text-secondary: #9B97A0;
-  --text-dim: #5A5762;
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-dim: #666666;
 
   /* Borders */
-  --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-medium: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.15);
+  --border-medium: rgba(255, 255, 255, 0.3);
 
   /* Spacing */
   --space-xs: 4px;
@@ -50,48 +50,48 @@
   --space-2xl: 48px;
   --space-3xl: 64px;
 
-  /* Radius */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  /* Radius -> Sharp Edges */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
 
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
-  --shadow-gold: 0 0 30px rgba(212, 168, 75, 0.15);
+  /* Shadows -> Brutalist Hard Shadows */
+  --shadow-sm: 2px 2px 0px rgba(250, 215, 209, 0.4);
+  --shadow-md: 4px 4px 0px rgba(250, 215, 209, 0.4);
+  --shadow-lg: 8px 8px 0px rgba(250, 215, 209, 0.4);
+  --shadow-gold: 4px 4px 0px var(--gold);
 
   /* Typography */
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'VT323', monospace;
+  --font-sans: 'Space Mono', monospace;
 }
 
 [data-theme='light'] {
   /* Backgrounds */
-  --bg-primary: #F8F9FA;
-  --bg-secondary: #FFFFFF;
-  --bg-tertiary: #F1F3F5;
-  --bg-elevated: #FFFFFF;
+  --bg-primary: #f4f4f0;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e8e8e4;
+  --bg-elevated: #ffffff;
 
-  /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(212, 168, 75, 0.3);
+  /* Brutalist */
+  --glass-bg: #f4f4f0;
+  --glass-border: rgba(35, 8, 0, 0.4);
 
   /* Text */
-  --text-primary: #111827;
-  --text-secondary: #4B5563;
-  --text-dim: #6B7280;
+  --text-primary: #230800;
+  --text-secondary: #4a3b38;
+  --text-dim: #8c7e7a;
 
   /* Borders */
-  --border-subtle: rgba(0, 0, 0, 0.06);
-  --border-medium: rgba(0, 0, 0, 0.1);
+  --border-subtle: rgba(35, 8, 0, 0.15);
+  --border-medium: rgba(35, 8, 0, 0.3);
 
   /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
-  --shadow-gold: 0 0 30px rgba(212, 168, 75, 0.25);
+  --shadow-sm: 2px 2px 0px rgba(35, 8, 0, 0.8);
+  --shadow-md: 4px 4px 0px rgba(35, 8, 0, 0.8);
+  --shadow-lg: 8px 8px 0px rgba(35, 8, 0, 0.8);
+  --shadow-gold: 4px 4px 0px #230800;
 }
 
 /* ----- Reset & Base ----- */
@@ -184,24 +184,27 @@ button {
 /* ----- Typography ----- */
 .heading-xl {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 700;
+  font-size: clamp(3.5rem, 6vw, 5rem);
+  font-weight: 400;
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .heading-lg {
   font-family: var(--font-serif);
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: 600;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 400;
   line-height: 1.2;
+  text-transform: uppercase;
 }
 
 .heading-md {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 400;
   line-height: 1.3;
+  text-transform: uppercase;
 }
 
 .text-gold {
@@ -222,19 +225,20 @@ button {
   align-items: center;
   gap: var(--space-sm);
   padding: 12px 28px;
-  background: linear-gradient(135deg, var(--gold) 0%, #C49A3C 100%);
+  background: var(--gold);
   color: #0A0D14;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
-  border: none;
-  border-radius: var(--radius-sm);
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(212, 168, 75, 0.3);
+  border: 2px solid var(--gold);
+  border-radius: 0px;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-gold);
+  text-transform: uppercase;
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 25px rgba(212, 168, 75, 0.45);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--gold);
 }
 
 .btn-secondary {
@@ -242,18 +246,21 @@ button {
   align-items: center;
   gap: var(--space-sm);
   padding: 12px 28px;
-  background: transparent;
+  background: var(--bg-primary);
   color: var(--gold);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
-  border: 1px solid var(--gold);
-  border-radius: var(--radius-sm);
-  transition: all 0.3s ease;
+  border: 2px solid var(--gold);
+  border-radius: 0px;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-gold);
+  text-transform: uppercase;
 }
 
 .btn-secondary:hover {
   background: var(--gold-dim);
-  transform: translateY(-2px);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px var(--gold);
 }
 
 /* ----- Badge ----- */
@@ -295,12 +302,12 @@ button {
 .role-juror2 { --role-color: var(--role-juror2); }
 
 .role-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 0;
   background: var(--role-color);
   display: inline-block;
-  box-shadow: 0 0 8px var(--role-color);
+  box-shadow: 2px 2px 0px var(--role-color);
 }
 
 /* ----- Animations ----- */

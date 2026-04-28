@@ -9,30 +9,32 @@
 }
 
 .message {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-left: 3px solid var(--msg-color);
-  border-radius: 0 8px 8px 0;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--msg-color);
+  border-radius: 0px;
   padding: 12px 16px;
   animation: fadeInUp 0.3s ease-out;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .message:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--bg-tertiary);
+  transform: translate(-1px, -1px);
+  box-shadow: 2px 2px 0px var(--msg-color);
 }
 
 .verdict {
-  background: rgba(212, 168, 75, 0.08);
-  border: 1px solid rgba(212, 168, 75, 0.25);
-  border-left: 4px solid var(--gold);
+  background: var(--gold-dim);
+  border: 1px solid var(--gold);
+  border-left: 6px solid var(--gold);
   animation: verdictReveal 0.8s ease-out;
 }
 
 .encrypted {
-  background: rgba(46, 204, 113, 0.04);
-  border: 1px solid rgba(46, 204, 113, 0.1);
-  border-left: 3px solid var(--msg-color);
+  background: var(--bg-secondary);
+  border: 1px dashed var(--msg-color);
+  border-left: 4px solid var(--msg-color);
 }
 
 .msgHeader {
@@ -72,13 +74,14 @@
 .type {
   margin-left: auto;
   font-size: 0.7rem;
-  font-weight: 500;
-  color: var(--text-dim);
+  font-weight: 700;
+  color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--bg-tertiary);
   padding: 2px 8px;
-  border-radius: 10px;
+  border-radius: 0px;
+  border: 1px solid var(--border-subtle);
 }
 
 .time {
