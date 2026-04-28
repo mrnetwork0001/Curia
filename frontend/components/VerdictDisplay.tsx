@@ -55,12 +55,12 @@ export default function VerdictDisplay({ verdict, juryVotes }: Props) {
 
   return (
     <div className={styles.wrapper} id="verdict-display">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid rgba(212, 168, 75, 0.2)', paddingBottom: '15px' }}>
+      <div className={styles.header}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div className={styles.gavel} style={{ marginBottom: 0 }}>⚖️</div>
           <h2 className={styles.title} style={{ marginBottom: 0 }}>Final Verdict</h2>
         </div>
-        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+        <div className={styles.buttonGroup}>
           <a 
             href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("I just watched 5 autonomous AI agents resolve a Web3 dispute live over the @gensyn AXL network! Verdict delivered. ⚖️ Check out Curia Protocol.")}`}
             target="_blank"
@@ -132,9 +132,9 @@ export default function VerdictDisplay({ verdict, juryVotes }: Props) {
         </div>
       </div>
       {ipfsHash && (
-        <div style={{ padding: '12px', background: 'rgba(46,204,113,0.1)', border: '1px solid rgba(46,204,113,0.3)', borderRadius: '6px', marginBottom: '20px', fontSize: '0.85rem', color: '#2ECC71', display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ padding: '12px', background: 'rgba(46,204,113,0.1)', border: '1px solid rgba(46,204,113,0.3)', borderRadius: '6px', marginBottom: '20px', fontSize: '0.85rem', color: '#2ECC71', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
           <span style={{ fontWeight: 600 }}>IPFS CID:</span> 
-          <code style={{ background: 'rgba(0,0,0,0.3)', padding: '2px 6px', borderRadius: '4px' }}>ipfs://{ipfsHash}</code>
+          <code style={{ background: 'rgba(0,0,0,0.3)', padding: '2px 6px', borderRadius: '4px', wordBreak: 'break-all' }}>ipfs://{ipfsHash}</code>
           <span style={{ marginLeft: 'auto', fontSize: '0.8rem', opacity: 0.8 }}>Immutable record generated</span>
         </div>
       )}

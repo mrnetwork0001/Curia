@@ -160,3 +160,22 @@
     order: 3;
   }
 }
+
+@media (max-width: 768px) {
+  .main {
+    padding: 80px 12px 16px;
+  }
+  
+  .header {
+    margin-bottom: 16px;
+  }
+  
+  .headerRight {
+    gap: 8px;
+  }
+  
+  .axlModeBadge {
+    padding: 4px 8px;
+    font-size: 0.65rem;
+  }
+}
