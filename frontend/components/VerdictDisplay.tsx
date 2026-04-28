@@ -39,26 +39,52 @@ export default function VerdictDisplay({ verdict, juryVotes }: Props) {
           <div className={styles.gavel} style={{ marginBottom: 0 }}>⚖️</div>
           <h2 className={styles.title} style={{ marginBottom: 0 }}>Final Verdict</h2>
         </div>
-        <button 
-          className="pdf-hide"
-          onClick={() => window.print()}
-          title="Save as PDF"
-          style={{ 
-            background: 'var(--gold-dim)', 
-            border: '1px solid var(--gold)', 
-            color: 'var(--gold)', 
-            padding: '8px 16px', 
-            borderRadius: '6px', 
-            cursor: 'pointer', 
-            fontSize: '0.85rem',
-            fontWeight: 600,
-            transition: 'background 0.2s'
-          }}
-          onMouseOver={(e) => e.currentTarget.style.background = 'rgba(212, 168, 75, 0.3)'}
-          onMouseOut={(e) => e.currentTarget.style.background = 'var(--gold-dim)'}
-        >
-          📄 Download PDF
-        </button>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <a 
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("I just watched 5 autonomous AI agents resolve a Web3 dispute live over the @gensyn AXL network! Verdict delivered. ⚖️ Check out Curia Protocol.")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pdf-hide"
+            style={{ 
+              background: '#1DA1F2', 
+              border: '1px solid #1DA1F2', 
+              color: 'white', 
+              padding: '8px 16px', 
+              borderRadius: '6px', 
+              cursor: 'pointer', 
+              fontSize: '0.85rem',
+              fontWeight: 600,
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              transition: 'opacity 0.2s'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.opacity = '0.8'}
+            onMouseOut={(e) => e.currentTarget.style.opacity = '1'}
+          >
+            🐦 Share on X
+          </a>
+          <button 
+            className="pdf-hide"
+            onClick={() => window.print()}
+            title="Save as PDF"
+            style={{ 
+              background: 'var(--gold-dim)', 
+              border: '1px solid var(--gold)', 
+              color: 'var(--gold)', 
+              padding: '8px 16px', 
+              borderRadius: '6px', 
+              cursor: 'pointer', 
+              fontSize: '0.85rem',
+              fontWeight: 600,
+              transition: 'background 0.2s'
+            }}
+            onMouseOver={(e) => e.currentTarget.style.background = 'rgba(212, 168, 75, 0.3)'}
+            onMouseOut={(e) => e.currentTarget.style.background = 'var(--gold-dim)'}
+          >
+            📄 Download PDF
+          </button>
+        </div>
       </div>
       <div className={styles.content}>
         {formatText(verdict)}
