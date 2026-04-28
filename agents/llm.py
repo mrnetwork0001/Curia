@@ -22,11 +22,21 @@ class LLMProvider(ABC):
 
 
 class OpenAIProvider(LLMProvider):
-    """OpenAI GPT provider."""
+    """OpenAI GPT provider — compatible with openai>=2.0.0."""
 
     def __init__(self, api_key: str, model: str = "gpt-4o-mini"):
+        import httpx
         from openai import OpenAI
-        self.client = OpenAI(api_key=api_key)
+        # Pass a custom httpx client to avoid the 'proxies' kwarg issue in
+        # some openai SDK builds running under Python 3.13
+        try:
+            self.client = OpenAI(
+                api_key=api_key,
+                http_client=httpx.Client(),
+            )
+        except TypeError:
+            # Fallback for SDKs that don't accept http_client
+            self.client = OpenAI(api_key=api_key)
         self.model = model
 
     def complete(self, system_prompt: str, user_prompt: str) -> str:
