@@ -142,16 +142,21 @@
   }
 
   .rightSection {
-    gap: 12px;
+    gap: 8px;
   }
 
   .meshStatus {
-    padding: 4px 8px;
+    padding: 3px 6px;
+    gap: 4px !important;
   }
 
   .statusText {
-    font-size: 0.6rem;
+    font-size: 0.55rem !important;
     white-space: nowrap;
+  }
+
+  .activeWord {
+    display: none;
   }
 
   .tagline {
