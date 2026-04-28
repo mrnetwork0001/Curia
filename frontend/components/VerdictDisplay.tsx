@@ -26,8 +26,32 @@ export default function VerdictDisplay({ verdict, juryVotes }: Props) {
 
   return (
     <div className={styles.wrapper} id="verdict-display">
-      <div className={styles.gavel}>⚖️</div>
-      <h2 className={styles.title}>Final Verdict</h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid rgba(212, 168, 75, 0.2)', paddingBottom: '15px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div className={styles.gavel} style={{ marginBottom: 0 }}>⚖️</div>
+          <h2 className={styles.title} style={{ marginBottom: 0 }}>Final Verdict</h2>
+        </div>
+        <button 
+          className="pdf-hide"
+          onClick={() => window.print()}
+          title="Save as PDF"
+          style={{ 
+            background: 'var(--gold-dim)', 
+            border: '1px solid var(--gold)', 
+            color: 'var(--gold)', 
+            padding: '8px 16px', 
+            borderRadius: '6px', 
+            cursor: 'pointer', 
+            fontSize: '0.85rem',
+            fontWeight: 600,
+            transition: 'background 0.2s'
+          }}
+          onMouseOver={(e) => e.currentTarget.style.background = 'rgba(212, 168, 75, 0.3)'}
+          onMouseOut={(e) => e.currentTarget.style.background = 'var(--gold-dim)'}
+        >
+          📄 Download PDF
+        </button>
+      </div>
       <div className={styles.content}>
         {formatText(verdict)}
       </div>

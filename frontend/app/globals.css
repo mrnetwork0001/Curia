@@ -471,3 +471,48 @@ label {
     padding-top: 70px;
   }
 }
+
+/* ----- Print & PDF Generation ----- */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #verdict-display, #verdict-display * {
+    visibility: visible;
+  }
+  #verdict-display {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    border: none !important;
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+  .pdf-hide {
+    display: none !important;
+  }
+  #verdict-display::before {
+    content: "⚖️ CURIA";
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    font-size: 120px;
+    color: rgba(0, 0, 0, 0.03) !important;
+    z-index: -1;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  #verdict-display * {
+    color: black !important;
+    border-color: #ccc !important;
+    text-shadow: none !important;
+  }
+  #verdict-display div {
+    background: transparent !important;
+  }
+}
