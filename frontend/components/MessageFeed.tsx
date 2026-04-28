@@ -12,8 +12,16 @@ interface Props {
 
 export default function MessageFeed({ messages }: Props) {
   const endRef = useRef<HTMLDivElement>(null);
+  const prevLength = useRef(messages.length);
 
   useEffect(() => {
+    if (messages.length > prevLength.current) {
+      // Play subtle chime for new messages
+      const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3");
+      audio.volume = 0.15;
+      audio.play().catch(e => console.log("Audio autoplay prevented"));
+    }
+    prevLength.current = messages.length;
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import styles from "./VerdictDisplay.module.css";
 
 interface Props {
@@ -9,6 +10,13 @@ interface Props {
 
 export default function VerdictDisplay({ verdict, juryVotes }: Props) {
   if (!verdict) return null;
+
+  useEffect(() => {
+    // Play authoritative gavel sound when verdict appears
+    const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2443/2443-preview.mp3");
+    audio.volume = 0.6;
+    audio.play().catch(e => console.log("Audio autoplay prevented by browser"));
+  }, []);
 
   const formatText = (text: string) => {
     return text.split('\n').map((line, i) => (
