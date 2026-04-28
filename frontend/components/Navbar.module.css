@@ -155,10 +155,6 @@
     white-space: nowrap;
   }
 
-  .activeWord {
-    display: none;
-  }
-
   .tagline {
     display: none;
   }

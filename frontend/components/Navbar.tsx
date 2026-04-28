@@ -73,9 +73,7 @@ export default function Navbar() {
 
           <div className={styles.meshStatus} title="5/5 Nodes Active">
             <div className={styles.pulseDot}></div>
-            <span className={styles.statusText}>
-              AXL Mesh <span className={styles.activeWord}>Active</span>
-            </span>
+            <span className={styles.statusText}>AXL Live</span>
           </div>
 
           <button 
