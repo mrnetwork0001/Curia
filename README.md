@@ -1,10 +1,11 @@
-# ⚖️ Curia - Decentralized AI Arbitration Protocol
+#  Curia - Decentralized AI Arbitration Protocol
 
-![Curia Cover Image](https://github.com/mrnetwork0001/Curia/raw/main/assets/cover.png) *(Note: Insert actual cover image if available)*
+<img width="1459" height="713" alt="28 04 2026_16 41 15_REC" src="https://github.com/user-attachments/assets/800faf73-112b-46b9-9b3f-aa0c615fcf9d" />
+
 
 > **Decentralized Justice, No Central Authority. Powered by Gensyn AXL.**
 
-🎥 **[Watch the 4-Minute Demo Video Here](https://youtube.com/link-to-your-video)**
+ **[Watch the 4-Minute Demo Video Here](https://youtube.com/link-to-your-video)**
 
 **Curia** is a multi-agent AI arbitration system designed to resolve complex real-world disputes in minutes. By utilizing independent AI agents with distinct legal roles (Judge, Prosecution, Defense, Jury) communicating **strictly peer-to-peer over the [Gensyn AXL](https://github.com/gensyn-ai/axl)** mesh network, Curia achieves consensus verdicts **without relying on any central coordinating server.** 
 
@@ -12,7 +13,7 @@ Built exclusively for the **Gensyn AXL Hackathon**, Curia proves that sophistica
 
 ---
 
-## 🏆 Why Curia Wins
+##  Why Curia Wins
 
 Current AI systems operate as black boxes, making them dangerous for dispute resolution. Curia solves this by forcing AI agents into a rigid, adversarial legal protocol. 
 
@@ -24,7 +25,7 @@ By heavily utilizing the **Gensyn AXL network**, Curia achieves what traditional
 
 ---
 
-## 🤖 AI Attribution & Spec-Driven Development
+##  AI Attribution & Spec-Driven Development
 
 In strict compliance with hackathon rules, we are completely transparent about our use of AI:
 - **AI Agents**: The core logic of Curia is driven by 5 autonomous LLM instances executing role-based behaviors (Judge, Prosecutor, Defender, Jurors).
@@ -33,7 +34,7 @@ In strict compliance with hackathon rules, we are completely transparent about o
 
 ---
 
-## 🏗️ Architecture & Network Flow
+##  Architecture & Network Flow
 
 ```text
                             ┌─────────────────────────────────────┐
@@ -69,7 +70,7 @@ In strict compliance with hackathon rules, we are completely transparent about o
 
 ---
 
-## 🔄 The P2P Trial Protocol
+## The P2P Trial Protocol
 
 Every trial proceeds through a rigorous mathematical sequence. The "API Server" merely observes; the trial is driven purely by agents firing REST `POST` calls to their local AXL `/send` endpoints, addressed to the other agents' cryptographic public keys.
 
@@ -83,7 +84,7 @@ Every trial proceeds through a rigorous mathematical sequence. The "API Server" 
 
 ---
 
-## 🎬 Live Demo / Setup
+## Live Demo / Setup
 
 The backend has been heavily battle-tested on a live Debian VPS, establishing a true overlay network. 
 
@@ -112,7 +113,7 @@ For production, the `/scripts` directory contains everything needed to spin up a
 
 ---
 
-## 🎨 Frontend
+## Frontend
 
 - **Dark courtroom aesthetic** - charcoal backgrounds with gold accents
 - **Glassmorphism panels** - `backdrop-filter: blur(16px)` with subtle borders
@@ -125,7 +126,7 @@ For production, the `/scripts` directory contains everything needed to spin up a
 
 ---
 
-## 🏆 Alignment with Gensyn Judging Criteria
+## Alignment with Gensyn Judging Criteria
 
 1. **Meaningful Use of AXL (Max Points):** Curia doesn’t just use AXL as a simple message queue. It uses **broadcasts** for public court records, **point-to-point** for cross-examination, and relies heavily on AXL's **inherent encryption** for secret jury deliberation. Without AXL, this architecture would require complex central databases and permission layers.
 2. **Technical Complexity:** Managing state across 5 independent processes communicating asynchronously over an unreliable overlay mesh network is deeply complex. Curia implements a resilient event-cascade, and uses a dual WebSocket + REST polling frontend strategy to ensure network latency never drops the UI state.
@@ -134,5 +135,5 @@ For production, the `/scripts` directory contains everything needed to spin up a
 
 ---
 
-## 📜 License
+## License
 MIT License. Built for the Gensyn AXL Hackathon 2026.
