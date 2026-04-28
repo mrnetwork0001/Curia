@@ -1,9 +1,12 @@
 import styles from "./Docs.module.css";
 import { Scale, Network, Shield, Cpu } from "lucide-react";
+import Navbar from "@/components/Navbar";
 
 export default function DocsPage() {
   return (
-    <div className={styles.container}>
+    <>
+      <Navbar />
+      <div className={styles.container}>
       <header className={styles.header}>
         <h1 className={styles.title}>Curia Protocol Documentation</h1>
         <p className={styles.subtitle}>Decentralized Justice, Powered by Gensyn AXL</p>
@@ -51,5 +54,6 @@ export default function DocsPage() {
         </p>
       </section>
     </div>
+    </>
   );
 }
