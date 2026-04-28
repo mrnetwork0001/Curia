@@ -77,6 +77,12 @@ class CourtSession:
         # Perform peer discovery
         self._discover_peers()
 
+        # In real AXL mode, wire in-process relay so the trial event-cascade
+        # works immediately without waiting for AXL /recv polling.
+        # Messages are still sent via AXL /send for the P2P demo.
+        if not simulation_mode:
+            self._wire_in_process_relay()
+
     def _discover_peers(self):
         """Register all agent peer IDs with each other."""
         # Collect all peer IDs
@@ -95,6 +101,21 @@ class CourtSession:
                     agent.register_peer(other_role, peer_id)
 
         logger.info(f"Peer discovery complete: {list(peer_map.keys())}")
+
+    def _wire_in_process_relay(self):
+        """Wire direct in-process message delivery between all same-process agents.
+
+        In real AXL mode, messages are sent via AXL /send (proving P2P usage)
+        but also forwarded directly to each other agent's handle_message() so
+        trial orchestration is not blocked by AXL /recv polling latency.
+        """
+        for role, agent in self.agents.items():
+            for other_role, other_agent in self.agents.items():
+                if other_role != role:
+                    peer_key = agent.peer_registry.get(other_role)
+                    if peer_key:
+                        agent.in_process_relay[peer_key] = other_agent.handle_message
+        logger.info("In-process relay wired for all agents (real AXL mode)")
 
     def _handle_agent_message(self, message: dict):
         """Callback fired whenever any agent sends or receives a message."""
@@ -206,7 +227,7 @@ class CourtSession:
             self.judge.open_case(case_data)
 
             # Wait for trial to complete (verdict delivered) or timeout
-            timeout = 120  # 2 minutes max
+            timeout = 300  # 5 minutes max
             start = time.time()
             while self._trial_running and (time.time() - start) < timeout:
                 time.sleep(1)

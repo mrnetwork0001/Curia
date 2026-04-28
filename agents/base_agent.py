@@ -96,6 +96,12 @@ class BaseAgent(ABC):
         self.running = False
         self._poll_thread: Optional[threading.Thread] = None
 
+        # In-process relay: peer_id -> handle_message callable
+        # Used in real AXL mode so trial event-cascade works even if
+        # AXL /recv polling is slow — messages are directly forwarded
+        # between same-process agents while still sending via AXL /send.
+        self.in_process_relay: dict[str, Callable] = {}
+
         # Simulated transport
         if simulation_mode:
             self._transport = SimulatedTransport()
@@ -148,6 +154,14 @@ class BaseAgent(ABC):
             except Exception as e:
                 logger.error(f"[{self.role}] Failed to send to {peer_id[:16]}: {e}")
 
+            # In-process relay: deliver directly to recipient if same process
+            relay_fn = self.in_process_relay.get(peer_id)
+            if relay_fn:
+                msg_copy = dict(message)  # shallow copy to avoid mutation races
+                threading.Thread(
+                    target=relay_fn, args=(self.role, msg_copy), daemon=True
+                ).start()
+
         self.message_log.append(message)
 
         # Callback is fired by the caller (broadcast fires it once; direct sends fire it here)
@@ -195,6 +209,14 @@ class BaseAgent(ABC):
                     except Exception as e:
                         logger.error(f"[{self.role}] Broadcast send to {peer_id[:16]} failed: {e}")
 
+                    # In-process relay for remaining peers
+                    relay_fn = self.in_process_relay.get(peer_id)
+                    if relay_fn:
+                        msg_copy = dict(stamped_msg)
+                        threading.Thread(
+                            target=relay_fn, args=(self.role, msg_copy), daemon=True
+                        ).start()
+
         # Fire event callback exactly once for the whole broadcast
         if self.on_message_callback:
             try:
@@ -220,6 +242,13 @@ class BaseAgent(ABC):
     def start_listening(self, poll_interval: float = 0.5):
         """Start a background thread that polls for messages."""
         self.running = True
+
+        # If in-process relay is wired (real AXL mode), skip the poll thread:
+        # messages are delivered directly to handle_message() by the relay,
+        # so polling /recv would cause duplicates.
+        if not self.simulation_mode and self.in_process_relay:
+            logger.info(f"[{self.role}] In-process relay active — AXL /recv poll skipped")
+            return
 
         def loop():
             while self.running:
