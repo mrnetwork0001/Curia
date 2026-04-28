@@ -181,13 +181,17 @@ EOF
 log ".env written (SIMULATION_MODE=false)"
 
 # ---------------------------------------------------------------
-# 8. Install Python dependencies
+# 8. Install Python dependencies (venv to satisfy Debian 12 PEP 668)
 # ---------------------------------------------------------------
-info "Installing Python dependencies..."
+info "Creating Python virtual environment..."
 cd "$CURIA_DIR"
-pip3 install -q -r requirements.txt
-# Ensure correct openai version
-pip3 install -q "openai>=2.0.0"
+python3 -m venv "$CURIA_DIR/venv"
+log "Virtual environment created at $CURIA_DIR/venv"
+
+info "Installing Python dependencies into venv..."
+"$CURIA_DIR/venv/bin/pip" install -q --upgrade pip
+"$CURIA_DIR/venv/bin/pip" install -q -r requirements.txt
+"$CURIA_DIR/venv/bin/pip" install -q "openai>=2.0.0"
 log "Python deps installed"
 
 # ---------------------------------------------------------------
@@ -251,7 +255,7 @@ done
 
 # Window 5: FastAPI server
 echo "🖥️  Starting Curia API server..."
-tmux new-window -t "$SESSION" -n api "cd $CURIA_DIR && python3 -m uvicorn server.main:app --host 0.0.0.0 --port 8000"
+tmux new-window -t "$SESSION" -n api "cd $CURIA_DIR && $CURIA_DIR/venv/bin/python -m uvicorn server.main:app --host 0.0.0.0 --port 8000"
 sleep 3
 
 echo ""
