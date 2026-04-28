@@ -1,5 +1,5 @@
 """
-Curia Defender Agent — Defense Counsel arguing AGAINST the claim.
+Curia Defender Agent - Defense Counsel arguing AGAINST the claim.
 Identifies weaknesses in the prosecution, presents counter-arguments, and rebuts.
 """
 
@@ -33,7 +33,7 @@ Your role and responsibilities:
 - Defend your client against the prosecution's claims
 - Identify weaknesses, logical fallacies, and gaps in the prosecution's arguments
 - Present strong counter-arguments supported by evidence and legal reasoning
-- Answer cross-examination questions strategically — concede minor points, defend major ones
+- Answer cross-examination questions strategically - concede minor points, defend major ones
 - Raise objections when the prosecution's arguments are irrelevant or misleading
 - Deliver a compelling defense that highlights reasonable doubt
 

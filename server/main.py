@@ -1,5 +1,5 @@
 """
-Curia API Server — FastAPI application with WebSocket support.
+Curia API Server - FastAPI application with WebSocket support.
 Connects the Next.js frontend to the agent trial system.
 """
 
@@ -57,13 +57,13 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Curia — Decentralized AI Arbitration Protocol",
+    title="Curia - Decentralized AI Arbitration Protocol",
     description="P2P courtroom where AI agents debate disputes and reach consensus verdicts via AXL",
     version="1.0.0",
     lifespan=lifespan,
 )
 
-# CORS — allow frontend
+# CORS - allow frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

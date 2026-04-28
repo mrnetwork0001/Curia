@@ -55,8 +55,8 @@ export function useWebSocket() {
       };
 
       ws.onerror = () => {
-        // Connection to remote host may fail transiently — REST polling is the fallback
-        console.warn("[WS] Connection error — will retry. REST polling active as fallback.");
+        // Connection to remote host may fail transiently - REST polling is the fallback
+        console.warn("[WS] Connection error - will retry. REST polling active as fallback.");
         ws.close();
       };
 

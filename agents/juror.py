@@ -1,5 +1,5 @@
 """
-Curia Juror Agent — Independent evaluator who deliberates and votes.
+Curia Juror Agent - Independent evaluator who deliberates and votes.
 Listens to all trial arguments, exchanges analysis P2P with other jurors
 (private channel), and delivers a verdict vote to the Judge.
 """
@@ -46,7 +46,7 @@ You must be INDEPENDENT and IMPARTIAL. Base your judgment solely on:
 2. The quality and logic of the arguments
 3. The fairness of the proceedings
 
-Your deliberation with other jurors is conducted over an ENCRYPTED private channel —
+Your deliberation with other jurors is conducted over an ENCRYPTED private channel -
 neither the prosecution, defense, nor the judge can see your deliberation messages.
 
 Keep your analysis concise and structured. Under 200 words per message."""
@@ -104,7 +104,7 @@ Keep your analysis concise and structured. Under 200 words per message."""
         analysis = self.llm.complete(self.get_system_prompt(), analysis_prompt)
         self.deliberation_rounds += 1
 
-        # Send ONLY to the other juror — private P2P channel
+        # Send ONLY to the other juror - private P2P channel
         analysis_msg = {
             "protocol": "curia",
             "case_id": case_id,
@@ -126,7 +126,7 @@ Keep your analysis concise and structured. Under 200 words per message."""
             "case_id": case_id,
             "phase": Phase.DELIBERATION.value,
             "message_type": MessageType.JURY_ANALYSIS.value,
-            "content": "[ENCRYPTED — Private Juror Deliberation Channel]",
+            "content": "[ENCRYPTED - Private Juror Deliberation Channel]",
             "to_role": "all",
             "metadata": {"encrypted": True, "round": self.deliberation_rounds},
         }
@@ -167,12 +167,12 @@ Keep your analysis concise and structured. Under 200 words per message."""
 
             # Broadcast redacted
             redacted_msg = response_msg.copy()
-            redacted_msg["content"] = "[ENCRYPTED — Private Juror Deliberation Channel]"
+            redacted_msg["content"] = "[ENCRYPTED - Private Juror Deliberation Channel]"
             redacted_msg["to_role"] = "all"
             self.broadcast(redacted_msg, exclude_roles=[self.other_juror_role])
 
         else:
-            # Deliberation complete — cast vote
+            # Deliberation complete - cast vote
             time.sleep(1)
             self._cast_vote(message.get("case_id", ""), other_analysis)
 
@@ -214,7 +214,7 @@ Keep your analysis concise and structured. Under 200 words per message."""
             "case_id": case_id,
             "phase": Phase.VERDICT.value,
             "message_type": MessageType.VERDICT_VOTE.value,
-            "content": f"[{self.role.upper()} has cast their vote — sealed and delivered to the Judge]",
+            "content": f"[{self.role.upper()} has cast their vote - sealed and delivered to the Judge]",
             "to_role": "all",
             "metadata": {"voter": self.role},
         }

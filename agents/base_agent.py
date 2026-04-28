@@ -1,5 +1,5 @@
 """
-Curia Base Agent — Abstract base class for all courtroom agents.
+Curia Base Agent - Abstract base class for all courtroom agents.
 Handles AXL communication (real or simulated), message logging, and event callbacks.
 """
 
@@ -98,7 +98,7 @@ class BaseAgent(ABC):
 
         # In-process relay: peer_id -> handle_message callable
         # Used in real AXL mode so trial event-cascade works even if
-        # AXL /recv polling is slow — messages are directly forwarded
+        # AXL /recv polling is slow - messages are directly forwarded
         # between same-process agents while still sending via AXL /send.
         self.in_process_relay: dict[str, Callable] = {}
 
@@ -195,7 +195,7 @@ class BaseAgent(ABC):
                 stamped_msg = self.message_log[-1]  # get the stamped copy back
                 first = False
             else:
-                # Direct transport send for remaining recipients — same message, no restamping
+                # Direct transport send for remaining recipients - same message, no restamping
                 if self.simulation_mode:
                     self._transport.send(self.peer_id, peer_id, stamped_msg)
                 else:
@@ -252,7 +252,7 @@ class BaseAgent(ABC):
         # messages are delivered directly to receive_message() by the relay,
         # so polling /recv would cause duplicates.
         if not self.simulation_mode and self.in_process_relay:
-            logger.info(f"[{self.role}] In-process relay active — AXL /recv poll skipped")
+            logger.info(f"[{self.role}] In-process relay active - AXL /recv poll skipped")
             return
 
         def loop():
@@ -305,7 +305,7 @@ class BaseAgent(ABC):
 
     @abstractmethod
     def handle_message(self, sender: str, message: dict):
-        """Handle an incoming message — implemented by each agent role."""
+        """Handle an incoming message - implemented by each agent role."""
         pass
 
     @abstractmethod

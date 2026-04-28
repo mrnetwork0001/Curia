@@ -26,11 +26,11 @@ AXL_PORTS = {
 
 # Display colors for the frontend (CSS hex values)
 ROLE_COLORS = {
-    "judge": "#D4A84B",       # Gold — authority
-    "prosecutor": "#E74C3C",  # Crimson — prosecution
-    "defender": "#4A90D9",    # Blue — defense
-    "juror1": "#2ECC71",      # Emerald — juror
-    "juror2": "#27AE60",      # Green — juror
+    "judge": "#D4A84B",       # Gold - authority
+    "prosecutor": "#E74C3C",  # Crimson - prosecution
+    "defender": "#4A90D9",    # Blue - defense
+    "juror1": "#2ECC71",      # Emerald - juror
+    "juror2": "#27AE60",      # Green - juror
 }
 
 ROLE_LABELS = {

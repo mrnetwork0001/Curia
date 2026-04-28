@@ -1,5 +1,5 @@
 """
-Curia Protocol — Message types, phase management, and schema definitions.
+Curia Protocol - Message types, phase management, and schema definitions.
 Every message between agents follows the CuriaMessage schema.
 """
 
@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 
 
 class Phase(str, Enum):
-    """Trial phases — executed in order."""
+    """Trial phases - executed in order."""
     FILING = "filing"
     OPENING = "opening"
     PROSECUTION = "prosecution"

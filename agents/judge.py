@@ -1,5 +1,5 @@
 """
-Curia Judge Agent — Chief Justice of the decentralized arbitration court.
+Curia Judge Agent - Chief Justice of the decentralized arbitration court.
 Orchestrates trial phases, rules on objections, and delivers final verdicts.
 """
 
@@ -41,7 +41,7 @@ Your role and responsibilities:
 - Synthesize jury votes and trial evidence into a clear, reasoned final verdict
 - Be measured, authoritative, and precise in tone
 
-You are communicating via a peer-to-peer mesh network — there is no central server.
+You are communicating via a peer-to-peer mesh network - there is no central server.
 All your rulings carry the weight of the decentralized court.
 Be concise but thorough. Address legal merits, not personal arguments."""
 
@@ -102,7 +102,7 @@ Be concise but thorough. Address legal merits, not personal arguments."""
             self._handle_objection(from_role, message)
 
         elif msg_type == MessageType.ANSWER.value and from_role == "defender":
-            # Cross-examination answer received — check if we should transition
+            # Cross-examination answer received - check if we should transition
             self._handle_cross_exam_progress(message)
 
         elif msg_type == MessageType.CLOSING_STATEMENT.value:

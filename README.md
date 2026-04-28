@@ -1,4 +1,4 @@
-# ⚖️ Curia — Decentralized AI Arbitration Protocol
+# ⚖️ Curia - Decentralized AI Arbitration Protocol
 
 ![Curia Cover Image](https://github.com/mrnetwork0001/Curia/raw/main/assets/cover.png) *(Note: Insert actual cover image if available)*
 
@@ -62,13 +62,13 @@ By heavily utilizing the **Gensyn AXL network**, Curia achieves what traditional
 
 Every trial proceeds through a rigorous mathematical sequence. The "API Server" merely observes; the trial is driven purely by agents firing REST `POST` calls to their local AXL `/send` endpoints, addressed to the other agents' cryptographic public keys.
 
-1. **Filing** — Dispute is seeded to the network.
-2. **Opening** — Judge broadcasts case brief (`message_type: CASE_BRIEF`).
-3. **Prosecution & Defense** — Both sides present arguments.
-4. **Cross-Examination (P2P Ping-Pong)** — Prosecutor fires direct `QUESTION` payloads to Defender. Defender fires back `ANSWER` payloads. 
-5. **Rebuttal** — Closing arguments are broadcast.
-6. **Deliberation (Encrypted Secret P2P)** — Jurors exchange analysis via private AXL channels, hidden from all others.
-7. **Verdict** — Jurors transmit sealed cryptographic votes to the Judge. The Judge calculates consensus and outputs the verdict.
+1. **Filing** - Dispute is seeded to the network.
+2. **Opening** - Judge broadcasts case brief (`message_type: CASE_BRIEF`).
+3. **Prosecution & Defense** - Both sides present arguments.
+4. **Cross-Examination (P2P Ping-Pong)** - Prosecutor fires direct `QUESTION` payloads to Defender. Defender fires back `ANSWER` payloads. 
+5. **Rebuttal** - Closing arguments are broadcast.
+6. **Deliberation (Encrypted Secret P2P)** - Jurors exchange analysis via private AXL channels, hidden from all others.
+7. **Verdict** - Jurors transmit sealed cryptographic votes to the Judge. The Judge calculates consensus and outputs the verdict.
 
 ---
 
@@ -103,14 +103,14 @@ For production, the `/scripts` directory contains everything needed to spin up a
 
 ## 🎨 Frontend
 
-- **Dark courtroom aesthetic** — charcoal backgrounds with gold accents
-- **Glassmorphism panels** — `backdrop-filter: blur(16px)` with subtle borders
-- **Typography & Markdown** — dynamic real-time parsing of LLM-generated typography (bolding/formatting) into clean UI elements. Playfair Display (serif headers = authority) + Inter (body).
-- **Native PDF Export** — one-click generation of beautifully formatted, watermarked PDF verdicts for official records using native browser printing APIs.
-- **Role-coded messages** — Gold (Judge), Red (Prosecutor), Blue (Defender), Green (Jurors)
-- **Encrypted indicators** — Jury deliberation shows `[ENCRYPTED — Private Juror Channel]`
-- **Verdict reveal** — dramatic animation when the final verdict drops
-- **Network visualization** — canvas-based pentagon mesh with particle animations
+- **Dark courtroom aesthetic** - charcoal backgrounds with gold accents
+- **Glassmorphism panels** - `backdrop-filter: blur(16px)` with subtle borders
+- **Typography & Markdown** - dynamic real-time parsing of LLM-generated typography (bolding/formatting) into clean UI elements. Playfair Display (serif headers = authority) + Inter (body).
+- **Native PDF Export** - one-click generation of beautifully formatted, watermarked PDF verdicts for official records using native browser printing APIs.
+- **Role-coded messages** - Gold (Judge), Red (Prosecutor), Blue (Defender), Green (Jurors)
+- **Encrypted indicators** - Jury deliberation shows `[ENCRYPTED - Private Juror Channel]`
+- **Verdict reveal** - dramatic animation when the final verdict drops
+- **Network visualization** - canvas-based pentagon mesh with particle animations
 
 ---
 

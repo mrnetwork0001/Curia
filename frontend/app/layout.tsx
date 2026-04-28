@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Curia — Decentralized AI Arbitration Protocol",
+  title: "Curia - Decentralized AI Arbitration Protocol",
   description:
     "Decentralized justice powered by adversarial AI agents communicating peer-to-peer over AXL. No central authority. Consensus verdicts.",
   keywords: [

@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================
-# Curia VPS Setup — Installs AXL + Deploys Full Stack
+# Curia VPS Setup - Installs AXL + Deploys Full Stack
 # Run as root on: 38.49.216.120
 # Usage: bash setup_vps.sh
 # =============================================================
@@ -18,7 +18,7 @@ info() { echo -e "${BLUE}→${NC}  $1"; }
 err()  { echo -e "${RED}✗${NC}  $1"; exit 1; }
 
 echo ""
-echo "⚖️  Curia VPS Setup — Decentralized AI Arbitration Protocol"
+echo "⚖️  Curia VPS Setup - Decentralized AI Arbitration Protocol"
 echo "============================================================"
 echo ""
 
@@ -40,7 +40,7 @@ if ! command -v go &>/dev/null; then
 fi
 
 if ! command -v go &>/dev/null; then
-    info "Apt Go not found — installing Go 1.24.2 manually..."
+    info "Apt Go not found - installing Go 1.24.2 manually..."
     wget -q "https://go.dev/dl/go1.24.2.linux-amd64.tar.gz" -O /tmp/go.tar.gz
     rm -rf /usr/local/go
     tar -C /usr/local -xzf /tmp/go.tar.gz
@@ -167,7 +167,7 @@ EOF
 log "AXL configs written"
 
 # ---------------------------------------------------------------
-# 7. Write .env (prompt for API key — never hardcode secrets)
+# 7. Write .env (prompt for API key - never hardcode secrets)
 # ---------------------------------------------------------------
 echo ""
 echo -n "🔑 Paste your OpenAI API key (input hidden): "
@@ -175,7 +175,7 @@ read -rs OPENAI_KEY
 echo ""
 
 if [ -z "$OPENAI_KEY" ]; then
-    warn "No API key entered — defaulting to mock mode (no real LLM)"
+    warn "No API key entered - defaulting to mock mode (no real LLM)"
     OPENAI_KEY="sk-xxx"
     LLM_PROVIDER="mock"
 else
@@ -260,9 +260,9 @@ echo "  Verifying AXL nodes..."
 for port in 9002 9012 9022 9032 9042; do
     if curl -sf "http://127.0.0.1:${port}/topology" > /dev/null 2>&1; then
         KEY=$(curl -s "http://127.0.0.1:${port}/topology" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('our_public_key','?')[:16]+'...')" 2>/dev/null)
-        echo "    ✓ Port $port — Key: $KEY"
+        echo "    ✓ Port $port - Key: $KEY"
     else
-        echo "    ✗ Port $port — NOT READY"
+        echo "    ✗ Port $port - NOT READY"
     fi
 done
 
@@ -281,12 +281,12 @@ echo "  WebSocket: ws://$(hostname -I | awk '{print $1}'):8000/ws"
 echo "  Health:    http://$(hostname -I | awk '{print $1}'):8000/api/health"
 echo ""
 echo "  tmux windows:"
-echo "    curia:judge      — Judge AXL node (port 9002)"
-echo "    curia:prosecutor — Prosecutor AXL node (port 9012)"
-echo "    curia:defender   — Defender AXL node (port 9022)"
-echo "    curia:juror1     — Juror1 AXL node (port 9032)"
-echo "    curia:juror2     — Juror2 AXL node (port 9042)"
-echo "    curia:api        — FastAPI server (port 8000)"
+echo "    curia:judge      - Judge AXL node (port 9002)"
+echo "    curia:prosecutor - Prosecutor AXL node (port 9012)"
+echo "    curia:defender   - Defender AXL node (port 9022)"
+echo "    curia:juror1     - Juror1 AXL node (port 9032)"
+echo "    curia:juror2     - Juror2 AXL node (port 9042)"
+echo "    curia:api        - FastAPI server (port 8000)"
 echo ""
 echo "  To view a window: tmux select-window -t curia:<name>"
 echo "  To attach:        tmux attach -t curia"

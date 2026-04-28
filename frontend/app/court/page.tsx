@@ -111,8 +111,8 @@ export default function CourtPage() {
                   color: simulationMode ? "#D4A84B" : "#2ECC71",
                 }}
                 title={simulationMode
-                  ? "Running in simulation mode — no real AXL nodes. Set SIMULATION_MODE=false and start AXL nodes to use real P2P network."
-                  : "Real AXL nodes active — all agent communication is encrypted P2P over the Yggdrasil mesh network."
+                  ? "Running in simulation mode - no real AXL nodes. Set SIMULATION_MODE=false and start AXL nodes to use real P2P network."
+                  : "Real AXL nodes active - all agent communication is encrypted P2P over the Yggdrasil mesh network."
                 }
               >
                 {simulationMode ? "⚡ SIMULATION MODE" : "🌐 REAL AXL NETWORK"}

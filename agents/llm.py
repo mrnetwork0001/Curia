@@ -1,5 +1,5 @@
 """
-Curia LLM Interface — Abstraction layer for LLM providers.
+Curia LLM Interface - Abstraction layer for LLM providers.
 Supports OpenAI (default), Anthropic, and Ollama.
 """
 
@@ -22,7 +22,7 @@ class LLMProvider(ABC):
 
 
 class OpenAIProvider(LLMProvider):
-    """OpenAI GPT provider — compatible with openai>=2.0.0."""
+    """OpenAI GPT provider - compatible with openai>=2.0.0."""
 
     def __init__(self, api_key: str, model: str = "gpt-4o-mini"):
         import httpx
@@ -171,7 +171,7 @@ def create_llm_provider(
         key = api_key or os.getenv("OPENAI_API_KEY", "")
         mdl = model or os.getenv("LLM_MODEL", "gpt-4o-mini")
         if not key or key == "sk-xxx":
-            logger.warning("No valid OpenAI API key — falling back to MockProvider")
+            logger.warning("No valid OpenAI API key - falling back to MockProvider")
             return MockProvider()
         return OpenAIProvider(api_key=key, model=mdl)
 
@@ -179,7 +179,7 @@ def create_llm_provider(
         key = api_key or os.getenv("ANTHROPIC_API_KEY", "")
         mdl = model or os.getenv("LLM_MODEL", "claude-3-haiku-20240307")
         if not key:
-            logger.warning("No Anthropic API key — falling back to MockProvider")
+            logger.warning("No Anthropic API key - falling back to MockProvider")
             return MockProvider()
         return AnthropicProvider(api_key=key, model=mdl)
 
@@ -189,5 +189,5 @@ def create_llm_provider(
         return OllamaProvider(host=host, model=mdl)
 
     else:
-        logger.warning(f"Unknown provider '{provider}' — using MockProvider")
+        logger.warning(f"Unknown provider '{provider}' - using MockProvider")
         return MockProvider()

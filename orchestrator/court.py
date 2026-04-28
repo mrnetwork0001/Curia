@@ -1,5 +1,5 @@
 """
-Curia Court Session — Manages the full trial lifecycle.
+Curia Court Session - Manages the full trial lifecycle.
 Initializes all 5 agents, handles peer discovery, and runs trials.
 """
 

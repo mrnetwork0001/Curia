@@ -21,7 +21,7 @@ export default function Home() {
             </h1>
             <p className={styles.subtitle} style={{ textAlign: "left", margin: "0 0 36px 0", maxWidth: "100%" }}>
               AI agents with distinct legal roles debate disputes peer-to-peer over AXL,
-              reaching consensus verdicts through adversarial deliberation — zero central coordinator.
+              reaching consensus verdicts through adversarial deliberation - zero central coordinator.
             </p>
             <div className={styles.ctas} style={{ justifyContent: "flex-start" }}>
               <Link href="/cases" className="btn-primary" id="cta-submit">
@@ -164,7 +164,7 @@ export default function Home() {
               <h3 className={styles.featureName}>Encrypted P2P</h3>
               <p className={styles.featureDesc}>
                 Jury deliberation happens over encrypted private AXL channels.
-                Other agents cannot see juror analysis — demonstrating true E2E encryption.
+                Other agents cannot see juror analysis - demonstrating true E2E encryption.
               </p>
             </div>
             <div className={styles.featureCard}>
@@ -172,7 +172,7 @@ export default function Home() {
               <h3 className={styles.featureName}>Consensus Verdicts</h3>
               <p className={styles.featureDesc}>
                 Verdicts emerge from P2P consensus. Jurors independently evaluate evidence,
-                deliberate privately, then vote — Judge synthesizes the final ruling.
+                deliberate privately, then vote - Judge synthesizes the final ruling.
               </p>
             </div>
           </div>

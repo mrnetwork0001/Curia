@@ -28,7 +28,7 @@ export default function AgentCard({ agent, isActive }: Props) {
       <div className={styles.peerId}>
         <span className={styles.peerLabel}>AXL Peer ID</span>
         <code className={styles.peerCode}>
-          {agent.peer_id ? `${agent.peer_id.slice(0, 8)}...${agent.peer_id.slice(-8)}` : "—"}
+          {agent.peer_id ? `${agent.peer_id.slice(0, 8)}...${agent.peer_id.slice(-8)}` : "-"}
         </code>
       </div>
       <div className={styles.stats}>

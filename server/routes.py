@@ -1,5 +1,5 @@
 """
-Curia REST API Routes — Endpoints for the frontend to interact with the trial system.
+Curia REST API Routes - Endpoints for the frontend to interact with the trial system.
 """
 
 import logging
@@ -39,7 +39,7 @@ async def health_check():
 
 @router.get("/cases")
 async def list_cases():
-    """List all cases — sample + active + completed."""
+    """List all cases - sample + active + completed."""
     sample_cases = load_sample_cases()
     active_cases = []
 

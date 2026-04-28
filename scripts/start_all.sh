@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================
-# Curia — Start All Services
+# Curia - Start All Services
 # Starts 5 AXL nodes, the FastAPI server, and all 5 agents
 # ============================================================
 
@@ -12,7 +12,7 @@ AXL_BIN="${AXL_BIN:-../axl/node}"
 
 cd "$PROJECT_DIR"
 
-echo "⚖️  Starting Curia — Decentralized AI Arbitration Protocol"
+echo "⚖️  Starting Curia - Decentralized AI Arbitration Protocol"
 echo "============================================================"
 
 # Generate keys if they don't exist

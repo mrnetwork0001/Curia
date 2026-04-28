@@ -1,5 +1,5 @@
 """
-Curia Dispute Loader — Loads sample cases and parses user-submitted disputes.
+Curia Dispute Loader - Loads sample cases and parses user-submitted disputes.
 """
 
 import json

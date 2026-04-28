@@ -1,5 +1,5 @@
 """
-Curia Server State — In-memory state manager & WebSocket connection manager.
+Curia Server State - In-memory state manager & WebSocket connection manager.
 """
 
 import asyncio
@@ -42,7 +42,7 @@ class ConnectionManager:
 
     def broadcast_sync(self, data: dict):
         """
-        Thread-safe broadcast — called from agent threads.
+        Thread-safe broadcast - called from agent threads.
         Schedules the async broadcast on the event loop.
         """
         if self._loop and self._loop.is_running():

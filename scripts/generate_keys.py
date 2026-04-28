@@ -1,6 +1,6 @@
 """
 Generate ed25519 PEM keys for all 5 Curia agents.
-Cross-platform — works on Windows, macOS, and Linux.
+Cross-platform - works on Windows, macOS, and Linux.
 """
 
 import os
