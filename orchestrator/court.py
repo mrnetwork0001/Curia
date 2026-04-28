@@ -114,7 +114,7 @@ class CourtSession:
                 if other_role != role:
                     peer_key = agent.peer_registry.get(other_role)
                     if peer_key:
-                        agent.in_process_relay[peer_key] = other_agent.handle_message
+                        agent.in_process_relay[peer_key] = other_agent.receive_message
         logger.info("In-process relay wired for all agents (real AXL mode)")
 
     def _handle_agent_message(self, message: dict):

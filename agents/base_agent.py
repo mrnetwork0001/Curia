@@ -239,12 +239,17 @@ class BaseAgent(ABC):
             logger.error(f"[{self.role}] Poll error: {e}")
             return None
 
+    def receive_message(self, sender: str, message: dict):
+        """Receive a message, log it, and process it."""
+        self.message_log.append(message)
+        self.handle_message(sender, message)
+
     def start_listening(self, poll_interval: float = 0.5):
         """Start a background thread that polls for messages."""
         self.running = True
 
         # If in-process relay is wired (real AXL mode), skip the poll thread:
-        # messages are delivered directly to handle_message() by the relay,
+        # messages are delivered directly to receive_message() by the relay,
         # so polling /recv would cause duplicates.
         if not self.simulation_mode and self.in_process_relay:
             logger.info(f"[{self.role}] In-process relay active — AXL /recv poll skipped")
@@ -256,11 +261,10 @@ class BaseAgent(ABC):
                     result = self.poll_messages()
                     if result:
                         sender, message = result
-                        self.message_log.append(message)
                         # NOTE: Do NOT fire on_message_callback here.
                         # The sender already fired it exactly once via send_to_peer / broadcast.
                         # Firing it again on receive would cause duplicates in the transcript.
-                        self.handle_message(sender, message)
+                        self.receive_message(sender, message)
                 except Exception as e:
                     logger.error(f"[{self.role}] Listener error: {e}")
                 time.sleep(poll_interval)
