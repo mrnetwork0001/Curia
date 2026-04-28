@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
+import { Scale, Swords, Lock, Vote, Shield, User, Gavel } from "lucide-react";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -24,8 +25,8 @@ export default function Home() {
               reaching consensus verdicts through adversarial deliberation - zero central coordinator.
             </p>
             <div className={styles.ctas} style={{ justifyContent: "flex-start" }}>
-              <Link href="/cases" className="btn-primary" id="cta-submit">
-                ⚖️ Submit a Dispute
+              <Link href="/cases" className="btn-primary" id="cta-submit" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <Scale size={18} /> Submit a Dispute
               </Link>
               <Link href="/court" className="btn-secondary" id="cta-watch">
                 Watch a Live Trial →
@@ -152,7 +153,7 @@ export default function Home() {
         <section className={styles.features} id="features">
           <div className={styles.featureGrid}>
             <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>⚔️</div>
+              <div className={styles.featureIcon}><Swords size={32} color="#D4A84B" /></div>
               <h3 className={styles.featureName}>Adversarial Debate</h3>
               <p className={styles.featureDesc}>
                 Prosecution and defense AI agents argue both sides of every case,
@@ -160,7 +161,7 @@ export default function Home() {
               </p>
             </div>
             <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>🔒</div>
+              <div className={styles.featureIcon}><Lock size={32} color="#D4A84B" /></div>
               <h3 className={styles.featureName}>Encrypted P2P</h3>
               <p className={styles.featureDesc}>
                 Jury deliberation happens over encrypted private AXL channels.
@@ -168,7 +169,7 @@ export default function Home() {
               </p>
             </div>
             <div className={styles.featureCard}>
-              <div className={styles.featureIcon}>🗳️</div>
+              <div className={styles.featureIcon}><Vote size={32} color="#D4A84B" /></div>
               <h3 className={styles.featureName}>Consensus Verdicts</h3>
               <p className={styles.featureDesc}>
                 Verdicts emerge from P2P consensus. Jurors independently evaluate evidence,
@@ -183,14 +184,14 @@ export default function Home() {
           <h2 className={styles.sectionTitle}>How It Works</h2>
           <div className={styles.agentGrid}>
             {[
-              { icon: "⚖️", role: "Judge", color: "#D4A84B", desc: "Orchestrates proceedings, rules on objections, delivers final verdict" },
-              { icon: "🔴", role: "Prosecutor", color: "#E74C3C", desc: "Builds the case for the plaintiff, cross-examines the defense" },
-              { icon: "🛡️", role: "Defender", color: "#4A90D9", desc: "Counters prosecution arguments, identifies weaknesses" },
-              { icon: "👤", role: "Juror 1", color: "#2ECC71", desc: "Evaluates evidence independently, deliberates via encrypted P2P" },
-              { icon: "👤", role: "Juror 2", color: "#27AE60", desc: "Evaluates evidence independently, deliberates via encrypted P2P" },
+              { icon: <Gavel size={24} color="#D4A84B" />, role: "Judge", color: "#D4A84B", desc: "Orchestrates proceedings, rules on objections, delivers final verdict" },
+              { icon: <Swords size={24} color="#E74C3C" />, role: "Prosecutor", color: "#E74C3C", desc: "Builds the case for the plaintiff, cross-examines the defense" },
+              { icon: <Shield size={24} color="#4A90D9" />, role: "Defender", color: "#4A90D9", desc: "Counters prosecution arguments, identifies weaknesses" },
+              { icon: <User size={24} color="#2ECC71" />, role: "Juror 1", color: "#2ECC71", desc: "Evaluates evidence independently, deliberates via encrypted P2P" },
+              { icon: <User size={24} color="#27AE60" />, role: "Juror 2", color: "#27AE60", desc: "Evaluates evidence independently, deliberates via encrypted P2P" },
             ].map((agent) => (
               <div key={agent.role} className={styles.agentItem} style={{ borderColor: agent.color + "30" }}>
-                <span className={styles.agentIcon}>{agent.icon}</span>
+                <span className={styles.agentIcon} style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>{agent.icon}</span>
                 <h4 className={styles.agentRole} style={{ color: agent.color }}>{agent.role}</h4>
                 <p className={styles.agentDesc}>{agent.desc}</p>
                 <span className={styles.agentTag}>Separate AXL Node</span>
@@ -202,7 +203,7 @@ export default function Home() {
         {/* Footer */}
         <footer className={styles.footer}>
           <div className={styles.footerInner}>
-            <span className={styles.footerLogo}>⚖️ Curia Protocol</span>
+            <span className={styles.footerLogo} style={{ display: "flex", alignItems: "center", gap: "8px" }}><Scale size={18} /> Curia Protocol</span>
             <span className={styles.footerText}>Built for the Gensyn AXL Hackathon</span>
             <span className={styles.footerText}>Decentralized AI Arbitration</span>
           </div>

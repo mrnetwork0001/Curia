@@ -1,6 +1,7 @@
 "use client";
 
 import type { AgentInfo } from "@/lib/types";
+import { Gavel, Swords, Shield, User } from "lucide-react";
 import styles from "./AgentCard.module.css";
 
 interface Props {
@@ -9,6 +10,17 @@ interface Props {
 }
 
 export default function AgentCard({ agent, isActive }: Props) {
+  const getRoleIcon = (role: string) => {
+    switch (role) {
+      case "judge": return <Gavel size={18} />;
+      case "prosecutor": return <Swords size={18} />;
+      case "defender": return <Shield size={18} />;
+      case "juror1":
+      case "juror2": return <User size={18} />;
+      default: return <User size={18} />;
+    }
+  };
+
   return (
     <div
       className={`${styles.card} ${isActive ? styles.active : ""}`}
@@ -17,7 +29,7 @@ export default function AgentCard({ agent, isActive }: Props) {
     >
       <div className={styles.header}>
         <div className={styles.avatar}>
-          <span className={styles.icon}>{agent.icon}</span>
+          <span className={styles.icon}>{getRoleIcon(agent.role)}</span>
           <span className={styles.statusDot} data-status={agent.status} />
         </div>
         <div className={styles.info}>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import CaseSubmitForm from "@/components/CaseSubmitForm";
+import { Play } from "lucide-react";
 import { getCases, submitCase, startSampleCase } from "@/lib/api";
 import type { SampleCase, CaseRecord } from "@/lib/types";
 import styles from "./page.module.css";
@@ -122,8 +123,9 @@ export default function CasesPage() {
                     onClick={() => handleStartSample(c.id)}
                     disabled={loading}
                     id={`start-${c.id}`}
+                    style={{ display: "flex", alignItems: "center", gap: "6px", justifyContent: "center" }}
                   >
-                    ⚖️ Start Trial
+                    <Play size={16} /> Start Trial
                   </button>
                 </div>
               ))}

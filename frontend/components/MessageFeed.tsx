@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import type { CuriaMessage } from "@/lib/types";
 import { ROLE_COLORS } from "@/lib/types";
+import { Scale, Lock, Vote } from "lucide-react";
 import styles from "./MessageFeed.module.css";
 
 interface Props {
@@ -19,7 +20,7 @@ export default function MessageFeed({ messages }: Props) {
   if (messages.length === 0) {
     return (
       <div className={styles.empty}>
-        <div className={styles.emptyIcon}>⚖️</div>
+        <div className={styles.emptyIcon} style={{ display: "flex", justifyContent: "center", marginBottom: "16px", opacity: 0.5 }}><Scale size={48} /></div>
         <p>Waiting for trial to begin...</p>
         <p className={styles.emptyHint}>Submit a case to start proceedings</p>
       </div>
@@ -70,12 +71,12 @@ export default function MessageFeed({ messages }: Props) {
             </div>
             <div className={styles.content}>
               {isEncrypted ? (
-                <span className={styles.encryptedText}>
-                  🔒 {msg.content}
+                <span className={styles.encryptedText} style={{ display: "flex", alignItems: "flex-start", gap: "6px" }}>
+                  <Lock size={16} style={{ marginTop: "2px", flexShrink: 0 }} /> <span>{msg.content}</span>
                 </span>
               ) : isVote && msg.from_role !== "judge" ? (
-                <span className={styles.voteText}>
-                  🗳️ {msg.content}
+                <span className={styles.voteText} style={{ display: "flex", alignItems: "flex-start", gap: "6px" }}>
+                  <Vote size={16} style={{ marginTop: "2px", flexShrink: 0 }} /> <span>{msg.content}</span>
                 </span>
               ) : (
                 formatText(msg.content)

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import AgentCard from "@/components/AgentCard";
 import MessageFeed from "@/components/MessageFeed";
+import { Scale, Zap, Globe } from "lucide-react";
 import PhaseIndicator from "@/components/PhaseIndicator";
 import VerdictDisplay from "@/components/VerdictDisplay";
 import { useWebSocket } from "@/lib/websocket";
@@ -98,7 +99,9 @@ export default function CourtPage() {
       <Navbar />
       <main className={styles.main}>
         <div className={styles.header}>
-          <h1 className={styles.title}>⚖️ Live Courtroom</h1>
+          <h1 className={styles.title} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <Scale size={28} color="#D4A84B" /> Live Courtroom
+          </h1>
           <div className={styles.headerRight}>
             {simulationMode !== null && (
               <div
@@ -115,7 +118,11 @@ export default function CourtPage() {
                   : "Real AXL nodes active - all agent communication is encrypted P2P over the Yggdrasil mesh network."
                 }
               >
-                {simulationMode ? "⚡ SIMULATION MODE" : "🌐 REAL AXL NETWORK"}
+                {simulationMode ? (
+                  <span style={{ display: "flex", alignItems: "center", gap: "6px" }}><Zap size={14} /> SIMULATION MODE</span>
+                ) : (
+                  <span style={{ display: "flex", alignItems: "center", gap: "6px" }}><Globe size={14} /> REAL AXL NETWORK</span>
+                )}
               </div>
             )}
             <div className={styles.status}>

@@ -4,6 +4,8 @@
 
 > **Decentralized Justice, No Central Authority. Powered by Gensyn AXL.**
 
+🎥 **[Watch the 4-Minute Demo Video Here](https://youtube.com/link-to-your-video)**
+
 **Curia** is a multi-agent AI arbitration system designed to resolve complex real-world disputes in minutes. By utilizing independent AI agents with distinct legal roles (Judge, Prosecution, Defense, Jury) communicating **strictly peer-to-peer over the [Gensyn AXL](https://github.com/gensyn-ai/axl)** mesh network, Curia achieves consensus verdicts **without relying on any central coordinating server.** 
 
 Built exclusively for the **Gensyn AXL Hackathon**, Curia proves that sophisticated, adversarial AI reasoning can be executed entirely over a decentralized, encrypted peer-to-peer network.
@@ -19,6 +21,15 @@ By heavily utilizing the **Gensyn AXL network**, Curia achieves what traditional
 2. **Encrypted Private Channels:** Jurors deliberate in absolute secrecy. Because AXL enforces end-to-end encryption based on recipient public keys, the Jurors can freely share their analysis without the Judge, Defense, or Prosecution spying on the packets.
 3. **True P2P Network Topology:** The system forms a resilient mesh network (via Yggdrasil overlay) allowing any agent to broadcast, cross-examine, and rule seamlessly. 
 4. **Premium Visualization:** A gorgeous Next.js dashboard visualizes the live AXL mesh topology and trial transcripts in real-time.
+
+---
+
+## 🤖 AI Attribution & Spec-Driven Development
+
+In strict compliance with hackathon rules, we are completely transparent about our use of AI:
+- **AI Agents**: The core logic of Curia is driven by 5 autonomous LLM instances executing role-based behaviors (Judge, Prosecutor, Defender, Jurors).
+- **AI Coding Assistants**: We utilized AI coding tools (Claude/Copilot) to accelerate the development of boilerplate UI components and the Python WebSocket integration.
+- **Spec-Driven Workflow**: Curia was developed using a rigorous spec-driven workflow. You can view our complete architectural spec, planning artifacts, and agent prompts in the [neuralcourt_master_prompt.md](./neuralcourt_master_prompt.md) file included in this repository. All code and assets were generated *after* the hackathon officially began.
 
 ---
 

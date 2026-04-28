@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Gavel } from "lucide-react";
 import styles from "./CaseSubmitForm.module.css";
 
 interface Props {
@@ -115,8 +116,8 @@ export default function CaseSubmitForm({ onSubmit, loading }: Props) {
         />
       </div>
 
-      <button type="submit" className="btn-primary" disabled={loading || !title || !description} id="submit-case-btn">
-        {loading ? "Starting Trial..." : "⚖️ Submit to Court"}
+      <button type="submit" className="btn-primary" disabled={loading || !title || !description} id="submit-case-btn" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+        {loading ? "Starting Trial..." : <><Gavel size={18} /> Submit to Court</>}
       </button>
     </form>
   );
