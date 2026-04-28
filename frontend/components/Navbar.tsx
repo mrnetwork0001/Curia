@@ -50,10 +50,8 @@ export default function Navbar() {
                 href={link.href}
                 className={`${styles.link} ${pathname === link.href ? styles.active : ""}`}
                 onClick={() => setMenuOpen(false)}
-                {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               >
                 {link.label}
-                {link.external && <span style={{ fontSize: '0.7em', marginLeft: '4px', opacity: 0.7 }}>↗</span>}
               </Link>
             ))}
           </div>
