@@ -67,33 +67,6 @@
   --font-sans: 'Space Mono', monospace;
 }
 
-[data-theme='light'] {
-  /* Backgrounds */
-  --bg-primary: #f4f4f0;
-  --bg-secondary: #ffffff;
-  --bg-tertiary: #e8e8e4;
-  --bg-elevated: #ffffff;
-
-  /* Brutalist */
-  --glass-bg: #f4f4f0;
-  --glass-border: rgba(35, 8, 0, 0.4);
-
-  /* Text */
-  --text-primary: #230800;
-  --text-secondary: #4a3b38;
-  --text-dim: #8c7e7a;
-
-  /* Borders */
-  --border-subtle: rgba(35, 8, 0, 0.15);
-  --border-medium: rgba(35, 8, 0, 0.3);
-
-  /* Shadows */
-  --shadow-sm: 2px 2px 0px rgba(35, 8, 0, 0.8);
-  --shadow-md: 4px 4px 0px rgba(35, 8, 0, 0.8);
-  --shadow-lg: 8px 8px 0px rgba(35, 8, 0, 0.8);
-  --shadow-gold: 4px 4px 0px #230800;
-}
-
 /* ----- Reset & Base ----- */
 *,
 *::before,
