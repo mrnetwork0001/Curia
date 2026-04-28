@@ -14,6 +14,7 @@ export default function Navbar() {
     { href: "/court", label: "Courtroom" },
     { href: "/cases", label: "Cases" },
     { href: "/network", label: "Network" },
+    { href: "https://github.com/mrnetwork0001/Curia#readme", label: "Docs", external: true },
   ];
 
   return (
@@ -48,8 +49,10 @@ export default function Navbar() {
               href={link.href}
               className={`${styles.link} ${pathname === link.href ? styles.active : ""}`}
               onClick={() => setMenuOpen(false)}
+              {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             >
               {link.label}
+              {link.external && <span style={{ fontSize: '0.7em', marginLeft: '4px', opacity: 0.7 }}>↗</span>}
             </Link>
           ))}
         </div>
