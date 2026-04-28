@@ -13,6 +13,7 @@ interface Props {
 export default function MessageFeed({ messages }: Props) {
   const endRef = useRef<HTMLDivElement>(null);
   const prevLength = useRef(messages.length);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [expandedMsg, setExpandedMsg] = useState<string | null>(null);
 
   const toggleTrace = (id: string) => {
@@ -21,13 +22,23 @@ export default function MessageFeed({ messages }: Props) {
 
   useEffect(() => {
     if (messages.length > prevLength.current) {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
       // Play subtle chime for new messages
-      const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3");
-      audio.volume = 0.15;
-      audio.play().catch(e => console.log("Audio autoplay prevented"));
+      audioRef.current = new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3");
+      audioRef.current.volume = 0.15;
+      audioRef.current.play().catch(e => console.log("Audio autoplay prevented"));
     }
     prevLength.current = messages.length;
     endRef.current?.scrollIntoView({ behavior: "smooth" });
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
   }, [messages]);
 
   if (messages.length === 0) {
