@@ -101,6 +101,19 @@ For production, the `/scripts` directory contains everything needed to spin up a
 
 ---
 
+## 🎨 Frontend
+
+- **Dark courtroom aesthetic** — charcoal backgrounds with gold accents
+- **Glassmorphism panels** — `backdrop-filter: blur(16px)` with subtle borders
+- **Typography & Markdown** — dynamic real-time parsing of LLM-generated typography (bolding/formatting) into clean UI elements. Playfair Display (serif headers = authority) + Inter (body).
+- **Native PDF Export** — one-click generation of beautifully formatted, watermarked PDF verdicts for official records using native browser printing APIs.
+- **Role-coded messages** — Gold (Judge), Red (Prosecutor), Blue (Defender), Green (Jurors)
+- **Encrypted indicators** — Jury deliberation shows `[ENCRYPTED — Private Juror Channel]`
+- **Verdict reveal** — dramatic animation when the final verdict drops
+- **Network visualization** — canvas-based pentagon mesh with particle animations
+
+---
+
 ## 🏆 Alignment with Gensyn Judging Criteria
 
 1. **Meaningful Use of AXL (Max Points):** Curia doesn’t just use AXL as a simple message queue. It uses **broadcasts** for public court records, **point-to-point** for cross-examination, and relies heavily on AXL's **inherent encryption** for secret jury deliberation. Without AXL, this architecture would require complex central databases and permission layers.
