@@ -129,9 +129,10 @@ For production, the `/scripts` directory contains everything needed to spin up a
 ## Alignment with Gensyn Judging Criteria
 
 1. **Meaningful Use of AXL (Max Points):** Curia doesn’t just use AXL as a simple message queue. It uses **broadcasts** for public court records, **point-to-point** for cross-examination, and relies heavily on AXL's **inherent encryption** for secret jury deliberation. Without AXL, this architecture would require complex central databases and permission layers.
-2. **Technical Complexity:** Managing state across 5 independent processes communicating asynchronously over an unreliable overlay mesh network is deeply complex. Curia implements a resilient event-cascade, and uses a dual WebSocket + REST polling frontend strategy to ensure network latency never drops the UI state.
-3. **UI/UX Aesthetics:** The dashboard is built with Next.js 14, employing a premium, glassmorphic dark-mode design (charcoal & gold). The live courtroom transcript, status trackers, and live particle-mesh topology viewer are designed to WOW end-users.
-4. **Real World Utility:** Decentralized Autonomous Organizations (DAOs), smart contracts, and web3 communities currently have zero reliable, decentralized arbitration mechanisms for subjective disputes. Curia proves AI can solve this trustlessly.
+2. **Solving the AXL Decentralized Registry Problem:** A known challenge in raw AXL networks is that leaf nodes only see abstract `ed25519` keys in their local `/topology` trees, with no centralized registry to identify services. Curia elegantly solves this by building an application-layer **Legal Protocol**. We bind specific adversarial roles (Judge, Prosecution, Defense, Jury) to public keys out-of-band. This allows leaf nodes (like Jurors) to perfectly route encrypted P2P packets to each other without needing full visibility of the network graph.
+3. **Technical Complexity:** Managing state across 5 independent processes communicating asynchronously over an unreliable overlay mesh network is deeply complex. Curia implements a resilient event-cascade, and uses a dual WebSocket + REST polling frontend strategy to ensure network latency never drops the UI state.
+4. **UI/UX Aesthetics:** The dashboard is built with Next.js 14, employing a premium, glassmorphic dark-mode design (charcoal & gold). The live courtroom transcript, status trackers, and live particle-mesh topology viewer are designed to WOW end-users.
+5. **Real World Utility:** Decentralized Autonomous Organizations (DAOs), smart contracts, and web3 communities currently have zero reliable, decentralized arbitration mechanisms for subjective disputes. Curia proves AI can solve this trustlessly.
 
 ---
 

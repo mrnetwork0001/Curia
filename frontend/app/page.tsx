@@ -162,10 +162,10 @@ export default function Home() {
             </div>
             <div className={styles.featureCard}>
               <div className={styles.featureIcon}><Lock size={32} color="#D4A84B" /></div>
-              <h3 className={styles.featureName}>Encrypted P2P</h3>
+              <h3 className={styles.featureName}>Decentralized P2P Routing</h3>
               <p className={styles.featureDesc}>
-                Jury deliberation happens over encrypted private AXL channels.
-                Other agents cannot see juror analysis - demonstrating true E2E encryption.
+                Curia utilizes out-of-band role binding, allowing nodes to establish
+                private, encrypted P2P channels without relying on a centralized service registry or full network visibility.
               </p>
             </div>
             <div className={styles.featureCard}>
