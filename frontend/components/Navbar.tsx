@@ -56,11 +56,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className={styles.meshStatus} title="5/5 Nodes Active">
-            <div className={styles.pulseDot}></div>
-            <span className={styles.statusText}>AXL Live</span>
-          </div>
-
           <button
             className={styles.hamburger}
             onClick={() => setMenuOpen(!menuOpen)}
