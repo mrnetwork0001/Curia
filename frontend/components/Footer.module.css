@@ -28,3 +28,14 @@
   color: var(--text-dim);
   text-transform: uppercase;
 }
+
+.footerLink {
+  color: var(--gold);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.footerLink:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
