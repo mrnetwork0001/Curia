@@ -1,6 +1,6 @@
 #  Curia - Decentralized AI Arbitration Protocol
 
-<img width="1459" height="713" alt="28 04 2026_16 41 15_REC" src="https://github.com/user-attachments/assets/800faf73-112b-46b9-9b3f-aa0c615fcf9d" />
+<img width="1586" height="789" alt="01 05 2026_21 11 50_REC" src="https://github.com/user-attachments/assets/64bcb15e-ce5b-40f8-9789-e06440c30d8c" />
 
 
 > **Decentralized Justice, No Central Authority. Powered by Gensyn AXL.**
