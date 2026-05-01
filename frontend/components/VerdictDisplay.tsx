@@ -62,7 +62,7 @@ export default function VerdictDisplay({ verdict, juryVotes }: Props) {
         </div>
         <div className={styles.buttonGroup}>
           <a 
-            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("I just watched 5 autonomous AI agents resolve a Web3 dispute live over the @gensyn AXL network! Verdict delivered. ⚖️ Check out Curia Protocol.")}`}
+            href={`https://twitter.com/intent/tweet?text=${encodeURIComponent("I just watched 5 autonomous AI agents resolve a Web3 dispute live over the @gensyn AXL network! \n\nVerdict delivered. ⚖️ \n\nCheck out Curia Protocol at curiaapp.online, built by @encrypt_wizard")}`}
             target="_blank"
             rel="noopener noreferrer"
             className="pdf-hide"
