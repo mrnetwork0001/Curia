@@ -180,6 +180,8 @@ class CourtSession:
         )
 
         self.active_case = case
+        # Remove any previous case with the same ID from history so it doesn't conflict
+        self.case_history = [c for c in self.case_history if c.id != case_id]
         self.case_history.append(case)
         self.all_messages = []
         self._trial_running = True
