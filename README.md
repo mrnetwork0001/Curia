@@ -152,5 +152,4 @@ Curia is designed to be the foundational arbitration layer for the decentralized
 
 ---
 
-## License
-MIT License. Built for the Gensyn AXL Hackathon 2026.
+Built for the Gensyn AXL Hackathon (OpenAgents 2026) by **[MrNetwork](https://x.com/encrypt_wizard)**
