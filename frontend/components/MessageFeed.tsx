@@ -12,6 +12,7 @@ interface Props {
 
 export default function MessageFeed({ messages }: Props) {
   const endRef = useRef<HTMLDivElement>(null);
+  const feedRef = useRef<HTMLDivElement>(null);
   const prevLength = useRef(messages.length);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [expandedMsg, setExpandedMsg] = useState<string | null>(null);
@@ -21,6 +22,13 @@ export default function MessageFeed({ messages }: Props) {
   };
 
   useEffect(() => {
+    let shouldAutoScroll = true;
+    if (feedRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = feedRef.current;
+      // If user scrolled up more than 150px from bottom, don't auto-scroll
+      shouldAutoScroll = scrollHeight - scrollTop - clientHeight < 150;
+    }
+
     if (messages.length > prevLength.current) {
       if (audioRef.current) {
         audioRef.current.pause();
@@ -30,9 +38,12 @@ export default function MessageFeed({ messages }: Props) {
       audioRef.current = new Audio("https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3");
       audioRef.current.volume = 0.15;
       audioRef.current.play().catch(e => console.log("Audio autoplay prevented"));
+      
+      if (shouldAutoScroll || messages.length === 1) {
+        endRef.current?.scrollIntoView({ behavior: "smooth" });
+      }
     }
     prevLength.current = messages.length;
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
 
     return () => {
       if (audioRef.current) {
@@ -66,7 +77,7 @@ export default function MessageFeed({ messages }: Props) {
   };
 
   return (
-    <div className={styles.feed} id="message-feed">
+    <div className={styles.feed} id="message-feed" ref={feedRef}>
       {messages.map((msg, idx) => {
         const color = ROLE_COLORS[msg.from_role] || "#888";
         const isEncrypted = msg.content.includes("[ENCRYPTED");
