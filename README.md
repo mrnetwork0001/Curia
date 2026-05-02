@@ -7,7 +7,7 @@
 
  **[Watch the 4-Minute Demo Video Here](https://youtube.com/link-to-your-video)**
 
-**Curia** is a multi-agent AI arbitration system designed to resolve complex real-world disputes in minutes. By utilizing independent AI agents with distinct legal roles (Judge, Prosecution, Defense, Jury) communicating **strictly peer-to-peer over the [Gensyn AXL](https://github.com/gensyn-ai/axl)** mesh network, Curia achieves consensus verdicts **without relying on any central coordinating server.** 
+**Curia** is a multi-agent AI arbitration system designed to resolve complex real-world disputes in minutes. By utilizing independent AI agents with distinct legal roles (Judge, Prosecution, Defense, Jury) communicating **strictly peer-to-peer over the [Gensyn Agent eXchange Layer (AXL)](https://github.com/gensyn-ai/axl)** mesh network, Curia achieves consensus verdicts **without relying on any central coordinating server.** 
 
 Built exclusively for the **Gensyn AXL Hackathon**, Curia proves that sophisticated, adversarial AI reasoning can be executed entirely over a decentralized, encrypted peer-to-peer network.
 
@@ -57,6 +57,12 @@ In strict compliance with hackathon rules, we are completely transparent about o
               └────────────┴───────────────┴───────────────┴────────────┘
                             GENSYN AXL P2P ENCRYPTED MESH 
 ```
+
+### Strict Separation: Network vs. Application Layer
+
+A core technical achievement of Curia is the strict decoupling of the network routing from the AI reasoning:
+- **The Network Layer (Gensyn AXL Nodes):** 5 distinct Go-based AXL nodes run in the background. Their only job is to establish the P2P Yggdrasil overlay, handle `ed25519` cryptographic identities, and route encrypted bytes. They know nothing about "trials" or "AI".
+- **The Application Layer (Python Agents):** The autonomous LLM agents live entirely in a separate Python process. They connect to their respective local AXL nodes via REST (`9002-9042`) to inject and pull payloads from the mesh. This ensures the AI reasoning is highly abstracted from the low-level mesh routing.
 
 ### 5 Independent Entities, Zero Coordination Servers
 
@@ -133,6 +139,17 @@ For production, the `/scripts` directory contains everything needed to spin up a
 3. **Technical Complexity:** Managing state across 5 independent processes communicating asynchronously over an unreliable overlay mesh network is deeply complex. Curia implements a resilient event-cascade, and uses a dual WebSocket + REST polling frontend strategy to ensure network latency never drops the UI state.
 4. **UI/UX Aesthetics:** The dashboard is built with Next.js 14, employing a premium, glassmorphic dark-mode design (charcoal & gold). The live courtroom transcript, status trackers, and live particle-mesh topology viewer are designed to WOW end-users.
 5. **Real World Utility:** Decentralized Autonomous Organizations (DAOs), smart contracts, and web3 communities currently have zero reliable, decentralized arbitration mechanisms for subjective disputes. Curia proves AI can solve this trustlessly.
+
+---
+
+## 🚀 Roadmap & Future Features
+
+Curia is designed to be the foundational arbitration layer for the decentralized web. Our future roadmap includes:
+
+1. **On-Chain Settlement (Gensyn Chain Integration):** Deploying Curia smart contracts natively on the **Gensyn Chain (Mainnet)** to automatically execute escrow payouts based on the Judge's cryptographic signature.
+2. **Staking & Slashing Mechanics:** Utilizing the Gensyn protocol's native tokenomics. AI agents (especially Jurors) will be required to stake tokens to participate in the arbitration mesh. If a Juror deviates heavily from consensus maliciously, they get slashed on the Gensyn Chain, ensuring economic security.
+3. **DAO Governance Plugins:** Seamless integrations for Aragon, Realms, and other DAO frameworks so protocols can route subjective governance disputes directly to the Curia AXL mesh.
+4. **Verifiable Inference (ZK-Proofs):** Integrating Zero-Knowledge Machine Learning (ZKML) to mathematically prove on-chain that the LLM inference generating the verdict was not tampered with by the node operator.
 
 ---
 
