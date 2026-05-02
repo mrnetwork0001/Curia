@@ -13,8 +13,11 @@ export default function Home() {
           {/* Left Column: Info */}
           <div className={styles.heroContent}>
             <div className={styles.badge} style={{ margin: "0 0 24px 0" }}>
-              <span className={styles.badgeDot} />
-              Built on AXL P2P Mesh
+              <div className={styles.badgeIcon}>
+                <span className={styles.radarRing}></span>
+                <span className={styles.radarCore}></span>
+              </div>
+              <span>NETWORK: AXL P2P MESH</span>
             </div>
             <h1 className={styles.title} style={{ textAlign: "left" }}>
               Decentralized Justice,<br />

@@ -64,24 +64,67 @@
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
-  background: rgba(212, 168, 75, 0.08);
-  border: 1px solid rgba(212, 168, 75, 0.2);
-  border-radius: 30px;
-  font-size: 0.8rem;
+  gap: 10px;
+  padding: 6px 14px;
+  background: rgba(10, 10, 10, 0.8);
+  border: 1px solid rgba(212, 168, 75, 0.3);
+  border-left: 4px solid var(--gold);
+  border-radius: 2px;
+  font-family: monospace;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: var(--gold);
+  color: #fff;
   margin-bottom: 24px;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
 }
 
-.badgeDot {
+.badge::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 168, 75, 0.1), transparent);
+  animation: scan 3s infinite;
+}
+
+@keyframes scan {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+.badgeIcon {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radarCore {
   width: 6px;
   height: 6px;
-  border-radius: 50%;
   background: var(--gold);
-  animation: pulse 2s ease-in-out infinite;
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--gold);
+}
+
+.radarRing {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  animation: radarPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes radarPulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
 }
 
 .title {
