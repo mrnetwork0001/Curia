@@ -4,7 +4,7 @@
 
 > **Decentralized Justice, No Central Authority. Powered by Gensyn AXL.**
 
-🌐 **[Live Demo: www.curiaapp.online](https://www.curiaapp.online/)** | 🎥 **[Watch the 4-Minute Demo Video](https://youtube.com/link-to-your-video)**
+**[Watch the 4-Minute Demo Video](https://youtube.com/link-to-your-video)**
 
 **Curia** is a multi-agent AI arbitration system designed to resolve complex real-world disputes in minutes. By utilizing independent AI agents with distinct legal roles (Judge, Prosecution, Defense, Jury) communicating **strictly peer-to-peer over the [Gensyn Agent eXchange Layer (AXL)](https://github.com/gensyn-ai/axl)** mesh network, Curia achieves consensus verdicts **without relying on any central coordinating server.** 
 
@@ -28,8 +28,8 @@ By heavily utilizing the **Gensyn AXL network**, Curia achieves what traditional
 
 In strict compliance with hackathon rules, we are completely transparent about our use of AI:
 - **AI Agents**: The core logic of Curia is driven by 5 autonomous LLM instances executing role-based behaviors (Judge, Prosecutor, Defender, Jurors).
-- **AI Coding Assistants**: We utilized AI coding tools (Claude/Copilot) to accelerate the development of boilerplate UI components and the Python WebSocket integration.
-- **Spec-Driven Workflow**: Curia was developed using a rigorous spec-driven workflow. You can view our complete architectural spec, planning artifacts, and agent prompts in the [neuralcourt_master_prompt.md](./neuralcourt_master_prompt.md) file included in this repository. All code and assets were generated *after* the hackathon officially began.
+- **AI Coding Assistant**: We utilized AI coding tool (Antigravity) to accelerate the development of boilerplate UI components and the Python WebSocket integration.
+- All code and assets were generated *after* the hackathon officially began.
 
 ---
 
@@ -141,11 +141,11 @@ For production, the `/scripts` directory contains everything needed to spin up a
 
 ---
 
-## 🚀 Roadmap & Future Features
+## Roadmap & Future Features
 
 Curia is designed to be the foundational arbitration layer for the decentralized web. Our future roadmap includes:
 
-1. **On-Chain Settlement (Gensyn Chain Integration):** Deploying Curia smart contracts natively on the **Gensyn Chain (Mainnet)** to automatically execute escrow payouts based on the Judge's cryptographic signature.
+1. **OnChain Settlement (Gensyn Chain Integration):** Deploying Curia smart contracts natively on the **Gensyn Chain (Mainnet)** to automatically execute escrow payouts based on the Judge's cryptographic signature.
 2. **Staking & Slashing Mechanics:** Utilizing the Gensyn protocol's native tokenomics. AI agents (especially Jurors) will be required to stake tokens to participate in the arbitration mesh. If a Juror deviates heavily from consensus maliciously, they get slashed on the Gensyn Chain, ensuring economic security.
 3. **DAO Governance Plugins:** Seamless integrations for Aragon, Realms, and other DAO frameworks so protocols can route subjective governance disputes directly to the Curia AXL mesh.
 4. **Verifiable Inference (ZK-Proofs):** Integrating Zero-Knowledge Machine Learning (ZKML) to mathematically prove on-chain that the LLM inference generating the verdict was not tampered with by the node operator.
