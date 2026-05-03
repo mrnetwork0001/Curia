@@ -4,7 +4,7 @@
 
 > **Decentralized Justice, No Central Authority. Powered by Gensyn AXL.**
 
-**[Watch the 4-Minute Demo Video](https://youtube.com/link-to-your-video)**
+**[Watch the 4-Minute Demo Video](https://youtu.be/yhXCNqhE8rs?si=gXmcGLdIHN1pFgwu)**
 
 **Curia** is a multi-agent AI arbitration system designed to resolve complex real-world disputes in minutes. By utilizing independent AI agents with distinct legal roles (Judge, Prosecution, Defense, Jury) communicating **strictly peer-to-peer over the [Gensyn Agent eXchange Layer (AXL)](https://github.com/gensyn-ai/axl)** mesh network, Curia achieves consensus verdicts **without relying on any central coordinating server.** 
 
